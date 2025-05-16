@@ -13,7 +13,7 @@ public class OpenApiConfiguration {
         return new OpenAPI()
                 .info(new Info()
                         .title("config-server API")
-                        .version("2.0.0-SNAPSHOT")
+                        .version("3.0.0-SNAPSHOT")
                         .description("This is the API documentation for the config-server. With the Config Server you have a central place to manage external properties for applications across all environments."));
     }
 }
