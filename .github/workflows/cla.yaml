@@ -7,7 +7,10 @@ on:
     types: [opened, closed, synchronize]
 
 permissions:
+  actions: write
   contents: read
+  pull-requests: write
+  statuses: write
 
 jobs:
   CLAAssistant:
