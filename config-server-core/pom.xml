@@ -15,7 +15,7 @@
         <encryption.cipher.version>12.2.1</encryption.cipher.version>
         <version.com.squareup.okhttp3-okhttp>4.12.0</version.com.squareup.okhttp3-okhttp>
         <!-- arquillian -->
-        <system-stubs.version>2.1.7</system-stubs.version>
+        <system-stubs.version>2.1.8</system-stubs.version>
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
         <microservice.dependencies.version>11.0.1</microservice.dependencies.version>
