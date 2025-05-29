@@ -375,6 +375,7 @@
                 <configuration>
                     <environmentVariables>
                         <DOCKER_HOST>${env.TEST_DOCKER_URL}</DOCKER_HOST>
+                        <TESTCONTAINERS_RYUK_DISABLED>true</TESTCONTAINERS_RYUK_DISABLED>
                     </environmentVariables>
                     <excludes>
                         <exclude>**/*IT.java</exclude>
