@@ -17,7 +17,7 @@
         <!-- arquillian -->
         <system-stubs.version>2.1.7</system-stubs.version>
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
-        <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.13</jacoco.plugin.version>
         <microservice.dependencies.version>11.0.1</microservice.dependencies.version>
         <postgresql.jdbc.version>42.7.4</postgresql.jdbc.version>
         <microservice.framework.version>7.0.1</microservice.framework.version>
