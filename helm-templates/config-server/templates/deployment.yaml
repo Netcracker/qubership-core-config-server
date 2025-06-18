@@ -1,0 +1,264 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+    name: '{{ .Values.SERVICE_NAME }}'
+    labels:
+        name: '{{ .Values.SERVICE_NAME }}'
+        app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
+        app.kubernetes.io/instance: '{{ cat .Values.SERVICE_NAME "-" .Values.NAMESPACE | nospace | trunc 63 | trimSuffix "-" }}'
+        app.kubernetes.io/version: '{{ .Values.ARTIFACT_DESCRIPTOR_VERSION }}'
+        app.kubernetes.io/component: 'backend'
+        app.kubernetes.io/part-of: 'Cloud-Core'
+        app.kubernetes.io/managed-by: 'saasDeployer'
+        app.kubernetes.io/technology: 'java-springboot'
+        deployment.qubership.org/sessionId: '{{ .Values.DEPLOYMENT_SESSION_ID }}'
+    annotations:
+        qubership.cloud/start.stage: '0'
+spec:
+    replicas: {{ .Values.REPLICAS | default 1 }}
+    revisionHistoryLimit: 3
+    strategy:
+    {{- if eq (default "" .Values.DEPLOYMENT_STRATEGY_TYPE) "recreate" }}
+      type: Recreate
+    {{- else if eq (default "" .Values.DEPLOYMENT_STRATEGY_TYPE) "best_effort_controlled_rollout" }}
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 80%
+    {{- else if eq (default "" .Values.DEPLOYMENT_STRATEGY_TYPE) "ramped_slow_rollout" }}
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+    {{- else if eq (default "" .Values.DEPLOYMENT_STRATEGY_TYPE) "custom_rollout" }}
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: {{ .Values.DEPLOYMENT_STRATEGY_MAXSURGE | default "25%" }}
+        maxUnavailable: {{ .Values.DEPLOYMENT_STRATEGY_MAXUNAVAILABLE | default "25%" }}
+    {{- else }}
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+    {{- end }}
+    template:
+        metadata:
+            labels:
+                name: '{{ .Values.SERVICE_NAME }}'
+                app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
+                app.kubernetes.io/instance: '{{ cat .Values.SERVICE_NAME "-" .Values.NAMESPACE | nospace | trunc 63 | trimSuffix "-" }}'
+                app.kubernetes.io/version: '{{ .Values.ARTIFACT_DESCRIPTOR_VERSION }}'
+                app.kubernetes.io/component: 'backend'
+                app.kubernetes.io/part-of: 'Cloud-Core'
+                app.kubernetes.io/managed-by: 'saasDeployer'
+                app.kubernetes.io/technology: 'java-springboot'
+        spec:
+            serviceAccountName: '{{ .Values.SERVICE_NAME }}'
+            volumes:
+            -   name: client-credentials
+                secret:
+                    secretName: '{{ .Values.SERVICE_NAME }}-client-credentials'
+{{ if and .Values.READONLY_CONTAINER_FILE_SYSTEM_ENABLED (eq .Values.PAAS_PLATFORM "KUBERNETES") }}
+            -   name: tmp
+                emptyDir: {}
+            -   name: env
+                emptyDir: {}
+            -   name: ncdiag
+                emptyDir: {}
+            -   name: glowroot
+                emptyDir: {}
+            -   name: nss
+                emptyDir: {}
+            -   name: java-certs
+                emptyDir: {}
+{{ end }}
+            containers:
+            -   name: '{{ .Values.SERVICE_NAME }}'
+                image: '{{ .Values.IMAGE_REPOSITORY }}:{{ .Values.TAG }}'
+                volumeMounts:
+                -   name: client-credentials
+                    mountPath: '/etc/secret'
+                    readOnly: true
+{{ if and .Values.READONLY_CONTAINER_FILE_SYSTEM_ENABLED (eq .Values.PAAS_PLATFORM "KUBERNETES") }}
+                -   name: tmp
+                    mountPath: /tmp
+                -   name: env
+                    mountPath: /etc/env
+                -   name: ncdiag
+                    mountPath: /app/ncdiag
+                -   name: glowroot
+                    mountPath: /app/glowroot
+                -   name: nss
+                    mountPath: /app/nss
+                -   name: java-certs
+                    mountPath: /etc/ssl/certs/java
+{{ end }}
+                args:
+                - /usr/bin/java
+                - '{{ .Values.MEM_ARGS }}'
+                - -Djava.security.egd=file:/dev/./urandom
+                - -jar
+                - /app/config-server.jar
+                ports:
+                -   name: web
+                    containerPort: 8080
+                    protocol: TCP
+                -   name: tls
+                    containerPort: 8443
+                    protocol: TCP
+                env:
+                -   name: SYM_KEY
+                    valueFrom:
+                        secretKeyRef:
+                            name: config-server-encryption-secret
+                            key: sym-key
+                -   name: KS_DEFAULT_KEY
+                    valueFrom:
+                        secretKeyRef:
+                            name: config-server-encryption-secret
+                            key: default-key
+                -   name: MICROSERVICE_NAME
+                    value: '{{ .Values.SERVICE_NAME }}'
+                -   name: CLOUD_NAMESPACE
+                    valueFrom:
+                        fieldRef:
+                            fieldPath: metadata.namespace
+                -   name: NAMESPACE
+                    value: null
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: metadata.namespace
+                -   name: XNIO_IO_THREAD
+                    value: '{{ .Values.XNIO_IO_THREAD }}'
+                -   name: XNIO_WORK_THREAD
+                    value: '{{ .Values.XNIO_WORK_THREAD }}'
+                -   name: TRACING_ENABLED
+                    value: '{{ .Values.TRACING_ENABLED }}'
+                -   name: TRACING_HOST
+                    value: '{{ .Values.TRACING_HOST }}'
+                -   name: TRACING_SAMPLER_PROBABILISTIC
+                    value: '{{ .Values.TRACING_SAMPLER_PROBABILISTIC }}'
+                -   name: LOG_LEVEL
+                    value: '{{ .Values.LOG_LEVEL }}'
+                -   name: ALLOWED_HEADERS
+                    value: '{{ .Values.ALLOWED_HEADERS }}'
+                -   name: API_DBAAS_ADDRESS
+                    value: '{{ .Values.API_DBAAS_ADDRESS }}'
+                -   name: DBAAS_CREDENTIALS_USERNAME
+                    valueFrom:
+                        secretKeyRef:
+                            name: 'dbaas-config-server-credential-secret'
+                            key: username
+                -   name: DBAAS_CREDENTIALS_PASSWORD
+                    valueFrom:
+                        secretKeyRef:
+                            name: 'dbaas-config-server-credential-secret'
+                            key: password
+                -   name: CLOUD_PUBLIC_HOST
+                    value: '{{ .Values.CLOUD_PUBLIC_HOST }}'
+                -   name: CLOUD_PRIVATE_HOST
+                    value: '{{ .Values.CLOUD_PRIVATE_HOST }}'
+                -   name: EMAIL_HOST
+                    value: '{{ .Values.EMAIL_HOST }}'
+                -   name: EMAIL_USER
+                    value: '{{ .Values.EMAIL_USER }}'
+                -   name: EMAIL_PASSWORD
+                    value: '{{ .Values.EMAIL_PASSWORD }}'
+                -   name: EMAIL_FROM
+                    value: '{{ .Values.EMAIL_FROM }}'
+                -   name: CLOUD_ADMIN_EMAIL
+                    value: '{{ .Values.CLOUD_ADMIN_EMAIL }}'
+                -   name: PRIVATE_GATEWAY_URL
+                    value: '{{ .Values.PRIVATE_GATEWAY_URL }}'
+                -   name: PUBLIC_GATEWAY_URL
+                    value: '{{ .Values.PUBLIC_GATEWAY_URL }}'
+                -   name: CLOUD_API_HOST
+                    value: '{{ .Values.CLOUD_API_HOST }}'
+                -   name: CLOUD_API_PORT
+                    value: '{{ .Values.CLOUD_API_PORT }}'
+                -   name: CLOUD_PROTOCOL
+                    value: '{{ .Values.CLOUD_PROTOCOL }}'
+                -   name: VAULT_INTEGRATION
+                    value: '{{ .Values.VAULT_INTEGRATION }}'
+                -   name: NC_DIAGNOSTIC_MODE
+                    value: '{{ .Values.NC_DIAGNOSTIC_MODE }}'
+                -   name: NC_DIAGNOSTIC_AGENT_SERVICE
+                    value: '{{ .Values.NC_DIAGNOSTIC_AGENT_SERVICE }}'
+                -   name: BASELINE_PROJ
+                    value: '{{ .Values.BASELINE_PROJ }}'
+                {{ if .Values.VAULT_ADDR }}
+                -   name: VAULT_SCHEMA
+                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${2}" }}'
+                -   name: VAULT_HOST
+                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${3}" }}'
+                -   name: VAULT_PORT
+                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${5}" }}'
+                {{ end }}
+                -   name: CONSUL_ENABLED
+                    value: '{{ .Values.CONSUL_ENABLED | default false }}'
+                {{ if .Values.CONSUL_ENABLED }}
+                - name: CONSUL_URL
+                  value: '{{ .Values.CONSUL_URL }}'
+                - name: CONSUL_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: config-server-consul-token
+                      key: token
+                {{ end }}
+                -   name: HTTP_BUFFER_HEADER_MAX_SIZE
+                    value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
+                resources:
+                    requests:
+                        cpu: '{{ .Values.CPU_REQUEST }}'
+                        memory: '{{ .Values.MEMORY_LIMIT }}'
+                    limits:
+                        cpu: '{{ .Values.CPU_LIMIT }}'
+                        memory: '{{ .Values.MEMORY_LIMIT }}'
+                livenessProbe:
+                    httpGet:
+                        path: /health
+                        port: web
+                        scheme: HTTP
+                    initialDelaySeconds: 120
+                    timeoutSeconds: 30
+                readinessProbe:
+                    httpGet:
+                        path: /health
+                        port: web
+                        scheme: HTTP
+                    initialDelaySeconds: 30
+                    timeoutSeconds: 30
+                securityContext:
+{{ if eq .Values.PAAS_PLATFORM "KUBERNETES" }}
+                    runAsGroup: 10001
+{{ end }}
+                    readOnlyRootFilesystem: {{ and .Values.READONLY_CONTAINER_FILE_SYSTEM_ENABLED (eq .Values.PAAS_PLATFORM "KUBERNETES") }}
+                    runAsNonRoot: true
+                    seccompProfile:
+                        type: RuntimeDefault
+                    allowPrivilegeEscalation: false
+                    capabilities:
+                        drop:
+                          - ALL
+            topologySpreadConstraints:
+{{- if .Values.CLOUD_TOPOLOGIES }}
+{{- range $v := .Values.CLOUD_TOPOLOGIES }}
+              - topologyKey: {{ $v.topologyKey }}
+                maxSkew: {{ $v.maxSkew | default 1 }}
+                whenUnsatisfiable: {{ $v.whenUnsatisfiable | default "ScheduleAnyway" }}
+                labelSelector:
+                  matchLabels:
+                    name: "{{ $.Values.SERVICE_NAME }}"
+{{- end }}
+{{- else }}
+              - maxSkew: 1
+                topologyKey: "{{ .Values.CLOUD_TOPOLOGY_KEY }}"
+                whenUnsatisfiable: ScheduleAnyway
+                labelSelector:
+                  matchLabels:
+                    name: "{{ .Values.SERVICE_NAME }}"
+{{- end }}
+    selector:
+        matchLabels:
+            name: '{{ .Values.SERVICE_NAME }}'
