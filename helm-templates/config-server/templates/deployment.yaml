@@ -103,16 +103,6 @@ spec:
                     containerPort: 8443
                     protocol: TCP
                 env:
-                -   name: SYM_KEY
-                    valueFrom:
-                        secretKeyRef:
-                            name: config-server-encryption-secret
-                            key: sym-key
-                -   name: KS_DEFAULT_KEY
-                    valueFrom:
-                        secretKeyRef:
-                            name: config-server-encryption-secret
-                            key: default-key
                 -   name: MICROSERVICE_NAME
                     value: '{{ .Values.SERVICE_NAME }}'
                 -   name: CLOUD_NAMESPACE
