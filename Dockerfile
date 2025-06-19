@@ -1,7 +1,7 @@
 FROM ghcr.io/netcracker/qubership/java-base:1.0.0
 LABEL maintainer="qubership"
 
-COPY --chown=10001:0 config-server-core/target/config-server-app-*.jar /app/config-server.jar
+COPY --chown=10001:0 config-server-app/target/config-server-app-*.jar /app/config-server.jar
 
 EXPOSE 8080
 
