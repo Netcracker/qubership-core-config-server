@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PostgresqlConfiguration.class, UnitTestApplicationConfig.class})
-public class ConfigPropertiesRestControllerTest {
+class ConfigPropertiesRestControllerTest {
 
     private static final String APPLICATION_NAME = "some-cool-service";
     private static final String PROFILE = "default";
@@ -51,17 +51,17 @@ public class ConfigPropertiesRestControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(new ConfigPropertiesController(encryptionService, configPropertiesRepository, new DefaultLockRegistry())).build();
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         configPropertiesRepository.deleteAll();
     }
 
     @Test
-    public void testDeleteProfile() throws Exception {
+    void testDeleteProfile() throws Exception {
         ConfigProfile configProfile = createConfigProfile();
         configPropertiesRepository.save(configProfile);
 
@@ -76,7 +76,7 @@ public class ConfigPropertiesRestControllerTest {
     }
 
     @Test
-    public void testDeleteConcreteProperty() throws Exception {
+    void testDeleteConcreteProperty() throws Exception {
         ConfigProfile configProfile = createConfigProfile();
         configPropertiesRepository.save(configProfile);
 
@@ -94,7 +94,7 @@ public class ConfigPropertiesRestControllerTest {
     }
 
     @Test
-    public void testGetApplicationsWithProfiles() throws Exception {
+    void testGetApplicationsWithProfiles() throws Exception {
         ConfigProfile configProfile1 = new ConfigProfile();
         ConfigProfile configProfile2 = new ConfigProfile();
         configProfile1.setApplication("application1");

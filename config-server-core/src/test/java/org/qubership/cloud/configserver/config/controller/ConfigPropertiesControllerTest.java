@@ -8,7 +8,6 @@ import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.util.TestUtils;
 import org.qubership.config.UnitTestApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UnitTestApplicationConfig.class})
-public class ConfigPropertiesControllerTest {
+class ConfigPropertiesControllerTest {
 
     @Autowired
     ConfigPropertiesController configPropertiesController;
@@ -47,18 +46,18 @@ public class ConfigPropertiesControllerTest {
     }};
 
     @AfterEach
-    public void afterTest() {
+    void afterTest() {
         utils.dropCollection();
     }
 
     @Test
-    public void addProperties_NoProfileExist_Test() throws InterruptedException {
+    void addProperties_NoProfileExist_Test() throws InterruptedException {
         configPropertiesController.addProperties(application, profile, initProperties);
         assertResult(initProperties);
     }
 
     @Test
-    public void addProperties_AddNewPropertyInMap_Test() throws InterruptedException {
+    void addProperties_AddNewPropertyInMap_Test() throws InterruptedException {
         utils.createTestProfileInDB(application, profile, convertMapOfStringToMapOfProperties(initProperties), 1);
         configPropertiesController.addProperties(application, profile, addedProperties);
         Map<String, String> resultProperties = new HashMap<>();
@@ -68,14 +67,14 @@ public class ConfigPropertiesControllerTest {
     }
 
     @Test
-    public void addProperties_ReplaceProperty_Test() throws InterruptedException {
+    void addProperties_ReplaceProperty_Test() throws InterruptedException {
         utils.createTestProfileInDB(application, profile, convertMapOfStringToMapOfProperties(initProperties), 1);
         configPropertiesController.addProperties(application, profile, replacedProperties);
         assertResult(replacedProperties);
     }
 
     @Test
-    public void addProperties_DeletePasswordFromLogs_Test() throws InterruptedException {
+    void addProperties_DeletePasswordFromLogs_Test() throws InterruptedException {
         String expected = String.format("Update properties for: %s/%s, properties: %s",
                 application, profile, addedProperties);
         LogCaptor logCaptor = LogCaptor.forClass(ConfigPropertiesController.class);
@@ -85,7 +84,7 @@ public class ConfigPropertiesControllerTest {
     }
 
     @Test
-    public void addProperties_WithWrongPropertyKeys_Test() throws InterruptedException {
+    void addProperties_WithWrongPropertyKeys_Test() throws InterruptedException {
         Map<String, String> addedProperties = new HashMap<>();
         final String conflictingKey11 = "a.b";
         final String conflictingKey12 = "a.b.c";

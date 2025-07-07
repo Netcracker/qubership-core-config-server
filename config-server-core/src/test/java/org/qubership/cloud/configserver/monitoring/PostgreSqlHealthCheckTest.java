@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PostgreSqlHealthCheckTest {
+class PostgreSqlHealthCheckTest {
 
     private static final String TEST = "test";
 
@@ -31,7 +31,7 @@ public class PostgreSqlHealthCheckTest {
     private ConfigPropertiesRepository configPropertiesRepository;
 
     @Test
-    public void healthcheck_Ok() {
+    void healthcheck_Ok() {
         ConfigProfile newConfigProfile = new ConfigProfile();
         newConfigProfile.setApplication(DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME);
         newConfigProfile.setProfile(DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME);
@@ -43,14 +43,14 @@ public class PostgreSqlHealthCheckTest {
     }
 
     @Test
-    public void healthcheck_Problem() {
+    void healthcheck_Problem() {
         when(configPropertiesRepository.findByApplicationAndProfile(anyString(), anyString()))
                 .thenThrow(new DataAccessResourceFailureException(TEST));
         assertEquals(HealthCheckStatus.PROBLEM.name(), postgreSqlDbHealthCheck.health().getStatus().toString());
     }
 
     @Test
-    public void healthcheck_Fatal() {
+    void healthcheck_Fatal() {
         when(configPropertiesRepository.findByApplicationAndProfile(DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
                 DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME))
                 .thenReturn(null);

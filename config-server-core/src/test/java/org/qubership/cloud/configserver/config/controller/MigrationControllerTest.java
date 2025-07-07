@@ -12,10 +12,10 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class MigrationControllerTest {
+class MigrationControllerTest {
 
     @Test
-    public void migrateToConsul() throws Exception {
+    void migrateToConsul() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new MigrationController(null)).build();
         MvcResult result = mockMvc.perform(post("/api/v1/migrate"))
                 .andExpect(status().isBadRequest())

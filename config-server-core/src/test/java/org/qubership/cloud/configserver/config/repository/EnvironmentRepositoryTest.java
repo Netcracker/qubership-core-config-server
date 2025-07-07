@@ -26,7 +26,7 @@ import static org.qubership.cloud.configserver.config.repository.DefaultEnvironm
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UnitTestApplicationConfig.class})
-public class EnvironmentRepositoryTest {
+class EnvironmentRepositoryTest {
 
     private final static String application = "ApplicationTest";
     private final static String profile = "ProfileTest";
@@ -45,12 +45,12 @@ public class EnvironmentRepositoryTest {
 
 
     @AfterEach
-    public void afterTest() {
+    void afterTest() {
         utils.dropCollection();
     }
 
     @Test
-    public void findOne_ProfilePropertyExist_Test() {
+    void findOne_ProfilePropertyExist_Test() {
         utils.createTestProfileInDB(application, profile, profileProperties, 1);
 
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
@@ -65,7 +65,7 @@ public class EnvironmentRepositoryTest {
     }
 
     @Test
-    public void findOne_ProfilePropertyNotExist_Test() {
+    void findOne_ProfilePropertyNotExist_Test() {
         utils.createTestProfileInDB(application, profile, Collections.emptyMap(), 1);
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
@@ -79,7 +79,7 @@ public class EnvironmentRepositoryTest {
     }
 
     @Test
-    public void findOne_ProfileNotExist_Test() {
+    void findOne_ProfileNotExist_Test() {
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
 
@@ -91,7 +91,7 @@ public class EnvironmentRepositoryTest {
     }
 
     @Test
-    public void findOne_GlobalPropertyVersionOverride_Test() {
+    void findOne_GlobalPropertyVersionOverride_Test() {
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 2);
         utils.createTestProfileInDB(application, profile, profileProperties, 1);
@@ -103,7 +103,7 @@ public class EnvironmentRepositoryTest {
     }
 
     @Test
-    public void findOne_LocalPropertyVersionOverride_Test() {
+    void findOne_LocalPropertyVersionOverride_Test() {
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
         utils.createTestProfileInDB(application, profile, profileProperties, 2);
@@ -115,7 +115,7 @@ public class EnvironmentRepositoryTest {
     }
 
     @Test
-    public void findOne_mergePropertyOrder() {
+    void findOne_mergePropertyOrder() {
         String profile = "profile1";
 
         utils.createTestProfileInDB(application, profile,

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
 
 @ExtendWith(SpringExtension.class)
-public class ConsulMigrationServiceTest {
+class ConsulMigrationServiceTest {
     private final static String NAMESPACE = "test-namespace";
     private static final String MIGRATED_Q = "select m from consul_migrated order by m limit 1";
 
@@ -37,13 +37,13 @@ public class ConsulMigrationServiceTest {
     private final ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         this.consulMigrationService = new ConsulMigrationService(NAMESPACE, pgRepository, jdbcTemplate, consulService);
         when(consulService.isConsulAvailable()).thenReturn(true);
     }
 
     @Test
-    public void shouldNotMigrateIfAlreadyMigrated() {
+    void shouldNotMigrateIfAlreadyMigrated() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(true);
 
         consulMigrationService.migrateToConsul();
@@ -51,7 +51,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldNotMigrateIfNothingToMigrate() {
+    void shouldNotMigrateIfNothingToMigrate() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(false);
         when(pgRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -60,7 +60,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldSetWdAfterMigration() {
+    void shouldSetWdAfterMigration() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(false);
 
         consulMigrationService.migrateToConsul();
@@ -68,7 +68,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldMigratePGProperties() {
+    void shouldMigratePGProperties() {
         List<ConfigProperty> properties = new ArrayList<>(2);
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk0", "tv0", false));
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk1", "tv1", false));
@@ -84,7 +84,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldThrowExceptionIfThereIsBigValueInProperties() {
+    void shouldThrowExceptionIfThereIsBigValueInProperties() {
         List<ConfigProperty> properties = new ArrayList<>(2);
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk0", "tv0", false));
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk1", "tv1", false));

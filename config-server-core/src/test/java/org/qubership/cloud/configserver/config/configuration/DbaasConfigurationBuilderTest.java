@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 import static org.qubership.cloud.configserver.config.configuration.DbaasConfigurationBuilder.DB_CLASSIFIER;
 
 @ExtendWith(MockitoExtension.class)
-public class DbaasConfigurationBuilderTest {
+class DbaasConfigurationBuilderTest {
 
     private static final String MICROSERVICE_NAME = "config-server";
     private static final String LOCAL_DEV_NAMESPACE_ENV_KEY = "LOCALDEV_NAMESPACE";
@@ -34,7 +34,7 @@ public class DbaasConfigurationBuilderTest {
     private final Map<String, String> properties = new HashMap<>();
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         properties.put("spring.application.name", MICROSERVICE_NAME);
         properties.put(LOCAL_DEV_NAMESPACE_ENV_KEY, LOCAL_DEV_NAMESPACE);
         when(environment.getProperty(anyString())).thenAnswer((Answer<String>) invocationOnMock -> {
@@ -44,13 +44,13 @@ public class DbaasConfigurationBuilderTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         reset(environment);
         properties.clear();
     }
 
     @Test
-    public void testCreateClassifier_withTenantId() {
+    void testCreateClassifier_withTenantId() {
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
 
         Map<String, Object> classifier = dbaasConfigurationBuilder.createClassifier(null);
@@ -62,7 +62,7 @@ public class DbaasConfigurationBuilderTest {
     }
 
     @Test
-    public void testCreateClassifier_withoutTenantId() {
+    void testCreateClassifier_withoutTenantId() {
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
         String tenantId = UUID.randomUUID().toString();
 
@@ -75,7 +75,7 @@ public class DbaasConfigurationBuilderTest {
     }
 
     @Test
-    public void testCreateClassifier_inCloudDbAttachMode() {
+    void testCreateClassifier_inCloudDbAttachMode() {
         properties.put(ATTACH_TO_CLOUD_DB_ENV_KEY, "true");
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
 

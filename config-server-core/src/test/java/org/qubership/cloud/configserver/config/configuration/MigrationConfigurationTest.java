@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.qubership.cloud.configserver.config.configuration.MigrationConfiguration.NEED_BASELINE_MIGRATION_Q;
 
-public class MigrationConfigurationTest {
+class MigrationConfigurationTest {
 
     private static final MigrationConfiguration migrationConfiguration = new MigrationConfiguration();
     private static final PostgresqlConfiguration postgresqlConfiguration = new PostgresqlConfiguration();
@@ -57,7 +57,7 @@ public class MigrationConfigurationTest {
     }
 
     @Test
-    public void flywayTest() {
+    void flywayTest() {
         Class[] cArg = new Class[1];
         cArg[0] = DataSource.class;
         try {
@@ -74,7 +74,7 @@ public class MigrationConfigurationTest {
     }
 
     @Test
-    public void initTest() {
+    void initTest() {
         Class[] cArg = new Class[2];
         cArg[0] = ApplicationContext.class;
         cArg[1] = FluentConfiguration.class;
@@ -96,7 +96,7 @@ public class MigrationConfigurationTest {
     }
 
     @Test
-    public void migrateBaseLineProps() throws Exception {
+    void migrateBaseLineProps() throws Exception {
         MigrationConfiguration migrationConfiguration = spy(new MigrationConfiguration());
         ReflectionTestUtils.setField(migrationConfiguration, "baselineProj", "test-proj");
         ReflectionTestUtils.setField(migrationConfiguration, "baselineFetchProperties", Arrays.asList("tenant.default.id", "bss.tenant.default-id"));

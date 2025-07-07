@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 
-public class PostgresqlConfigurationTest {
+class PostgresqlConfigurationTest {
 
     private final PostgresqlConfiguration postgresqlConfiguration;
     static String testDbaasUsername = "test-dbaas-username";
@@ -49,7 +49,7 @@ public class PostgresqlConfigurationTest {
     }
 
     @Test
-    public void entityManagerFactoryTest() {
+    void entityManagerFactoryTest() {
         org.qubership.cloud.configserver.PostgresqlConfiguration dataPostgresqlConfiguration = new org.qubership.cloud.configserver.PostgresqlConfiguration();
         DataSource dataSource = dataPostgresqlConfiguration.testDataSource();
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = postgresqlConfiguration.entityManagerFactory(dataSource);
@@ -73,7 +73,7 @@ public class PostgresqlConfigurationTest {
     }
 
     @Test
-    public void transactionManagerTest() {
+    void transactionManagerTest() {
         EntityManagerFactory entityManagerFactory = Mockito.mock(EntityManagerFactory.class);
         PlatformTransactionManager transactionManager = postgresqlConfiguration.transactionManager(entityManagerFactory);
         assertNotNull(transactionManager);
@@ -82,7 +82,7 @@ public class PostgresqlConfigurationTest {
     }
 
     @Test
-    public void testDbaasClientBodyInterceptor() {
+    void testDbaasClientBodyInterceptor() {
         Map<String, Object> testClassifier = Map.of("scope", "service",
                 "microserviceName", testMicroserviceName,
                 "namespace", testNamespace);

@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.qubership.cloud.configserver.config.service.ConsulService.CONSUL_CONFIG_PREFIX;
 
-public class ConsulServiceTest {
+class ConsulServiceTest {
 
     private Consul client;
 
@@ -38,7 +38,7 @@ public class ConsulServiceTest {
     protected static HostAndPort defaultClientHostAndPort;
 
     @BeforeEach
-    public void init() {
+    void init() {
         consulContainer.start();
 
         defaultClientHostAndPort = HostAndPort.fromParts(consulContainer.getHost(), consulContainer.getFirstMappedPort());
@@ -53,7 +53,7 @@ public class ConsulServiceTest {
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         consulContainer.stop();
     }
 

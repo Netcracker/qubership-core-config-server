@@ -7,13 +7,13 @@ import org.springframework.context.ApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public class SpringUtilityTest {
+class SpringUtilityTest {
 
     @Autowired
     private static ApplicationContext applicationContext;
 
     @Test
-    public void applicationContextActions() {
+    void applicationContextActions() {
         SpringUtility.setApplicationContext(applicationContext);
         assertSame(applicationContext, SpringUtility.getContext());
     }
