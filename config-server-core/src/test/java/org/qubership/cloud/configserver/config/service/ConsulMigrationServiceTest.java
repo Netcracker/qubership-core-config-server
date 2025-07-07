@@ -1,15 +1,15 @@
 package org.qubership.cloud.configserver.config.service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 public class ConsulMigrationServiceTest {
     private final static String NAMESPACE = "test-namespace";
     private static final String MIGRATED_Q = "select m from consul_migrated order by m limit 1";
@@ -34,9 +34,9 @@ public class ConsulMigrationServiceTest {
     @MockBean
     private ConfigPropertiesRepository pgRepository;
 
-    private ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
+    private final ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.consulMigrationService = new ConsulMigrationService(NAMESPACE, pgRepository, jdbcTemplate, consulService);
         when(consulService.isConsulAvailable()).thenReturn(true);

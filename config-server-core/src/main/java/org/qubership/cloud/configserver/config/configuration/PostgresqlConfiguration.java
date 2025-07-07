@@ -96,7 +96,7 @@ public class PostgresqlConfiguration {
             httpRequest.getHeaders().setContentLength(bytes.length);
             return clientHttpRequestExecution.execute(httpRequest, bytes);
         });
-        if (!StringUtils.isEmpty(this.dbaasUsername) && !StringUtils.isEmpty(this.dbaasPassword)) {
+        if (StringUtils.hasText(this.dbaasUsername) && StringUtils.hasText(this.dbaasPassword)) {
             restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor(this.dbaasUsername, this.dbaasPassword));
         }
         MicroserviceRestClient microserviceRestClient = new MicroserviceRestTemplate(restTemplate);

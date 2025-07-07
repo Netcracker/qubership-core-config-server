@@ -1,15 +1,17 @@
 package org.qubership.cloud.configserver.config;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ConfigPropertiesValidatorTest {
 
-    private ConfigPropertiesValidator validator = new ConfigPropertiesValidator();
+    private final ConfigPropertiesValidator validator = new ConfigPropertiesValidator();
 
     @Test
     public void validateKeysWithoutConflicts() {
@@ -37,7 +39,7 @@ public class ConfigPropertiesValidatorTest {
         ConfigPropertiesValidator.ValidationResult result = validator.validate(source);
 
         assertFalse(result.isValid());
-        assertEquals(result.getConflictingProperties().size(), 2);
+        assertEquals(2, result.getConflictingProperties().size());
         assertTrue(result.getConflictingProperties().contains(conflictingKey11 + " conflicts with " + conflictingKey12) || result.getConflictingProperties().contains(conflictingKey12 + " conflicts with " + conflictingKey11));
         assertTrue(result.getConflictingProperties().contains(conflictingKey21 + " conflicts with " + conflictingKey22) || result.getConflictingProperties().contains(conflictingKey22 + " conflicts with " + conflictingKey21));
     }

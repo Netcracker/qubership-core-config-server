@@ -1,16 +1,15 @@
 package org.qubership.cloud.configserver.config.configuration;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.qubership.cloud.configserver.PostgresqlConfiguration;
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.apache.commons.lang3.ArrayUtils;
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.configuration.FluentConfiguration;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -29,10 +28,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.qubership.cloud.configserver.config.configuration.MigrationConfiguration.NEED_BASELINE_MIGRATION_Q;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.qubership.cloud.configserver.config.configuration.MigrationConfiguration.NEED_BASELINE_MIGRATION_Q;
 
 public class MigrationConfigurationTest {
 
@@ -43,7 +43,7 @@ public class MigrationConfigurationTest {
     @Autowired
     ApplicationContext applicationContext;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         Class[] cArg = new Class[1];
         cArg[0] = DataSource.class;
@@ -51,7 +51,7 @@ public class MigrationConfigurationTest {
             fluentConfigurationMethod = migrationConfiguration.getClass().getDeclaredMethod("fluentConfiguration", cArg);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
-            Assert.fail();
+            fail();
         }
         fluentConfigurationMethod.setAccessible(true);
     }
@@ -69,7 +69,7 @@ public class MigrationConfigurationTest {
             assertEquals("classpath:db/migration/postgresql", flyway.getConfiguration().getLocations()[0].toString());
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail();
+            fail();
         }
     }
 
@@ -91,7 +91,7 @@ public class MigrationConfigurationTest {
             assertThat(initializingBean, instanceOf(InitializingBean.class));
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail();
+            fail();
         }
     }
 

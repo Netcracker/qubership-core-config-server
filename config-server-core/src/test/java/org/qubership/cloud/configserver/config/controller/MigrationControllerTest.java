@@ -1,10 +1,7 @@
 package org.qubership.cloud.configserver.config.controller;
 
+import org.junit.jupiter.api.Test;
 import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -15,7 +12,6 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 public class MigrationControllerTest {
 
     @Test

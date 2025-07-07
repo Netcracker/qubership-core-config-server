@@ -1,27 +1,28 @@
 package org.qubership.cloud.configserver.config.controller;
 
+import nl.altindag.log.LogCaptor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.util.TestUtils;
-import nl.altindag.log.LogCaptor;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.qubership.config.UnitTestApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UnitTestApplicationConfig.class})
 public class ConfigPropertiesControllerTest {
 
@@ -40,12 +41,12 @@ public class ConfigPropertiesControllerTest {
     private final static Map<String, String> initProperties = Collections.singletonMap(property1Key, property1Value);
     private final static Map<String, String> addedProperties = Collections.singletonMap(property2Key, property2Value);
     private final static Map<String, String> replacedProperties = Collections.singletonMap(property1Key, property2Value);
-    private final static Map<String, String> propertiesWithPassword = new HashMap<String, String>() {{
+    private final static Map<String, String> propertiesWithPassword = new HashMap<>() {{
         put(passwordKey, property1Value);
         put(property2Key, property2Value);
     }};
 
-    @After
+    @AfterEach
     public void afterTest() {
         utils.dropCollection();
     }
@@ -60,7 +61,7 @@ public class ConfigPropertiesControllerTest {
     public void addProperties_AddNewPropertyInMap_Test() throws InterruptedException {
         utils.createTestProfileInDB(application, profile, convertMapOfStringToMapOfProperties(initProperties), 1);
         configPropertiesController.addProperties(application, profile, addedProperties);
-        Map resultProperties = new HashMap();
+        Map<String, String> resultProperties = new HashMap<>();
         resultProperties.putAll(initProperties);
         resultProperties.putAll(addedProperties);
         assertResult(resultProperties);

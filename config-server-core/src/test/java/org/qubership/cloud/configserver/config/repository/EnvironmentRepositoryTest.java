@@ -1,30 +1,30 @@
 package org.qubership.cloud.configserver.config.repository;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.util.TestUtils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.qubership.config.UnitTestApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collections;
 import java.util.Map;
 
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME;
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME;
+import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
 
-
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UnitTestApplicationConfig.class})
 public class EnvironmentRepositoryTest {
 
@@ -44,7 +44,7 @@ public class EnvironmentRepositoryTest {
     private TestUtils utils;
 
 
-    @After
+    @AfterEach
     public void afterTest() {
         utils.dropCollection();
     }
@@ -57,14 +57,13 @@ public class EnvironmentRepositoryTest {
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
 
         Environment env = environmentRepository.findOne(application, profile, null);
-        PropertySource ps = env.getPropertySources().iterator().next();
-        Map props = ps.getSource();
+        PropertySource ps = env.getPropertySources().getFirst();
+        Map<?, ?> props = ps.getSource();
 
         String currentProperty = (String) props.get(propertyKey);
         assertThat(currentProperty, is(equalTo(profilePropertyValue)));
     }
 
-    //
     @Test
     public void findOne_ProfilePropertyNotExist_Test() {
         utils.createTestProfileInDB(application, profile, Collections.emptyMap(), 1);
@@ -72,8 +71,8 @@ public class EnvironmentRepositoryTest {
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
 
         Environment env = environmentRepository.findOne(application, profile, null);
-        PropertySource ps = env.getPropertySources().iterator().next();
-        Map props = ps.getSource();
+        PropertySource ps = env.getPropertySources().getFirst();
+        Map<?, ?> props = ps.getSource();
 
         String currentProperty = (String) props.get(propertyKey);
         assertThat(currentProperty, is(equalTo(globalPropertyValue)));
@@ -85,8 +84,8 @@ public class EnvironmentRepositoryTest {
                 CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
 
         Environment env = environmentRepository.findOne(application, profile, null);
-        PropertySource ps = env.getPropertySources().iterator().next();
-        Map props = ps.getSource();
+        PropertySource ps = env.getPropertySources().getFirst();
+        Map<?, ?> props = ps.getSource();
         String currentProperty = (String) props.get(propertyKey);
         assertThat(currentProperty, is(equalTo(globalPropertyValue)));
     }
@@ -125,10 +124,10 @@ public class EnvironmentRepositoryTest {
                 Collections.singletonMap("key", new ConfigProperty("aa", "cc", false)), 1);
 
         Environment env = environmentRepository.findOne(application, profile, null);
-        PropertySource ps = env.getPropertySources().iterator().next();
-        Map props = ps.getSource();
+        PropertySource ps = env.getPropertySources().getFirst();
+        Map<?, ?> props = ps.getSource();
 
         String currentProperty = (String) props.get("aa");
-        Assert.assertEquals("cc2", currentProperty);
+        assertEquals("cc2", currentProperty);
     }
 }

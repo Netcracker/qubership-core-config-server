@@ -1,22 +1,22 @@
 package org.qubership.cloud.configserver.config.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.qubership.cloud.configserver.PostgresqlConfiguration;
 import org.qubership.cloud.configserver.config.ApplicationWithProfiles;
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.config.repository.ExtendedConfigPropertiesRepository;
 import org.qubership.cloud.configserver.encryption.EncryptionService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.qubership.config.UnitTestApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.integration.support.locks.DefaultLockRegistry;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -26,13 +26,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PostgresqlConfiguration.class, UnitTestApplicationConfig.class})
 public class ConfigPropertiesRestControllerTest {
 
@@ -48,14 +48,14 @@ public class ConfigPropertiesRestControllerTest {
     private EncryptionService encryptionService;
 
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(new ConfigPropertiesController(encryptionService, configPropertiesRepository, new DefaultLockRegistry())).build();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         configPropertiesRepository.deleteAll();
     }
@@ -90,7 +90,7 @@ public class ConfigPropertiesRestControllerTest {
                 configPropertiesRepository.findByApplicationAndProfile(configProfile.getApplication(), configProfile.getProfile());
 
         assertNotNull(result);
-        assertTrue(result.get(0).getProperties().isEmpty());
+        assertTrue(result.getFirst().getProperties().isEmpty());
     }
 
     @Test
