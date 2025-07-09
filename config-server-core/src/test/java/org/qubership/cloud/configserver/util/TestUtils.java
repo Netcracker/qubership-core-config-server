@@ -56,12 +56,11 @@ public class TestUtils {
 
     public String getCollectionContent() {
         List<ConfigProfile> all = repository.findAll();
-        String result = "";
-        Iterator it = all.iterator();
-        while (it.hasNext()) {
-            result += it.next() + ";\n";
+        StringBuilder result = new StringBuilder();
+        for (ConfigProfile configProfile : all) {
+            result.append(configProfile).append(";\n");
         }
-        return result;
+        return result.toString();
     }
 
     public void createTestProfileInDB(String application, String profile, Map<String, ConfigProperty> properties, Integer version) {

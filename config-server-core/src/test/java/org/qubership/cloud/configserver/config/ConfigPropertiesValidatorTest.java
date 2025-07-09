@@ -1,18 +1,20 @@
 package org.qubership.cloud.configserver.config;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ConfigPropertiesValidatorTest {
 
-    private ConfigPropertiesValidator validator = new ConfigPropertiesValidator();
+class ConfigPropertiesValidatorTest {
+
+    private final ConfigPropertiesValidator validator = new ConfigPropertiesValidator();
 
     @Test
-    public void validateKeysWithoutConflicts() {
+    void validateKeysWithoutConflicts() {
         Map<String, ConfigProperty> source = new HashMap<>();
         source.put("a.b.c.d", null);
         source.put("a.b.c.e", null);
@@ -23,7 +25,7 @@ public class ConfigPropertiesValidatorTest {
     }
 
     @Test
-    public void validateKeysWithConflicts() {
+    void validateKeysWithConflicts() {
         Map<String, ConfigProperty> source = new HashMap<>();
         final String conflictingKey11 = "a.b";
         final String conflictingKey12 = "a.b.c";
@@ -37,13 +39,13 @@ public class ConfigPropertiesValidatorTest {
         ConfigPropertiesValidator.ValidationResult result = validator.validate(source);
 
         assertFalse(result.isValid());
-        assertEquals(result.getConflictingProperties().size(), 2);
+        assertEquals(2, result.getConflictingProperties().size());
         assertTrue(result.getConflictingProperties().contains(conflictingKey11 + " conflicts with " + conflictingKey12) || result.getConflictingProperties().contains(conflictingKey12 + " conflicts with " + conflictingKey11));
         assertTrue(result.getConflictingProperties().contains(conflictingKey21 + " conflicts with " + conflictingKey22) || result.getConflictingProperties().contains(conflictingKey22 + " conflicts with " + conflictingKey21));
     }
 
     @Test
-    public void validateKeyStartWithDot() {
+    void validateKeyStartWithDot() {
         Map<String, ConfigProperty> source = new HashMap<>();
         final String conflictingKey1 = ".a.b";
         final String conflictingKey2 = ".a.b.c";
@@ -57,7 +59,7 @@ public class ConfigPropertiesValidatorTest {
     }
 
     @Test
-    public void validateKeysWithConflictsAndStartWithDot() {
+    void validateKeysWithConflictsAndStartWithDot() {
         Map<String, ConfigProperty> source = new HashMap<>();
         final String conflictingKey11 = "a.b";
         final String conflictingKey12 = "a.b.c";

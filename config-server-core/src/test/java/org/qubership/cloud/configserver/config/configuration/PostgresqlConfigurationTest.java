@@ -4,8 +4,7 @@ package org.qubership.cloud.configserver.config.configuration;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.model.Header;
@@ -24,14 +23,15 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 
-public class PostgresqlConfigurationTest {
+class PostgresqlConfigurationTest {
 
-    private PostgresqlConfiguration postgresqlConfiguration;
+    private final PostgresqlConfiguration postgresqlConfiguration;
     static String testDbaasUsername = "test-dbaas-username";
     static String testDbaasPassword = "test-dbaas-password";
     static String testDbaasAgentHost = "http://127.0.0.1:1080";
@@ -49,14 +49,14 @@ public class PostgresqlConfigurationTest {
     }
 
     @Test
-    public void entityManagerFactoryTest() {
+    void entityManagerFactoryTest() {
         org.qubership.cloud.configserver.PostgresqlConfiguration dataPostgresqlConfiguration = new org.qubership.cloud.configserver.PostgresqlConfiguration();
         DataSource dataSource = dataPostgresqlConfiguration.testDataSource();
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = postgresqlConfiguration.entityManagerFactory(dataSource);
         assertNotNull(localContainerEntityManagerFactoryBean);
         assertThat(localContainerEntityManagerFactoryBean, instanceOf(LocalContainerEntityManagerFactoryBean.class));
         assertNotNull(localContainerEntityManagerFactoryBean.getJpaVendorAdapter());
-        Field internalPersistenceUnitManager = null;
+        Field internalPersistenceUnitManager;
         try {
             internalPersistenceUnitManager = localContainerEntityManagerFactoryBean.getClass().getDeclaredField("internalPersistenceUnitManager");
             internalPersistenceUnitManager.setAccessible(true);
@@ -68,21 +68,21 @@ public class PostgresqlConfigurationTest {
             assertSame(dataSource, localContainerEntityManagerFactoryBean.getDataSource());
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail();
+            fail();
         }
     }
 
     @Test
-    public void transactionManagerTest() {
+    void transactionManagerTest() {
         EntityManagerFactory entityManagerFactory = Mockito.mock(EntityManagerFactory.class);
         PlatformTransactionManager transactionManager = postgresqlConfiguration.transactionManager(entityManagerFactory);
         assertNotNull(transactionManager);
-        assertTrue(transactionManager instanceof JpaTransactionManager);
+        assertInstanceOf(JpaTransactionManager.class, transactionManager);
         assertEquals(entityManagerFactory, ((JpaTransactionManager) transactionManager).getEntityManagerFactory());
     }
 
     @Test
-    public void testDbaasClientBodyInterceptor() {
+    void testDbaasClientBodyInterceptor() {
         Map<String, Object> testClassifier = Map.of("scope", "service",
                 "microserviceName", testMicroserviceName,
                 "namespace", testNamespace);
