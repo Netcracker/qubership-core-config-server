@@ -8,7 +8,6 @@ import com.orbitz.consul.Consul;
 import com.orbitz.consul.config.CacheConfig;
 import com.orbitz.consul.config.ClientConfig;
 import com.orbitz.consul.model.kv.Value;
-import org.junit.Assert;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.HostPortWaitStrategy;
 
@@ -19,9 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.qubership.cloud.configserver.config.service.ConsulService.CONSUL_CONFIG_PREFIX;
 
-public class ConsulServiceTest {
+class ConsulServiceTest {
 
     private Consul client;
 
@@ -38,7 +38,7 @@ public class ConsulServiceTest {
     protected static HostAndPort defaultClientHostAndPort;
 
     @BeforeEach
-    public void init() {
+    void init() {
         consulContainer.start();
 
         defaultClientHostAndPort = HostAndPort.fromParts(consulContainer.getHost(), consulContainer.getFirstMappedPort());
@@ -53,7 +53,7 @@ public class ConsulServiceTest {
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         consulContainer.stop();
     }
 
@@ -87,9 +87,9 @@ public class ConsulServiceTest {
 
         ConfigProfile dataFromConsul = consulService.getByApplicationAndProfile("test-app", "specific");
 
-        Assertions.assertEquals(configProfile.getApplication(), dataFromConsul.getApplication());
-        Assertions.assertEquals(configProfile.getProfile(), dataFromConsul.getProfile());
-        Assertions.assertFalse(dataFromConsul.getProperties().isEmpty());
+        assertEquals(configProfile.getApplication(), dataFromConsul.getApplication());
+        assertEquals(configProfile.getProfile(), dataFromConsul.getProfile());
+        assertFalse(dataFromConsul.getProperties().isEmpty());
 
         Assertions.assertTrue(configProfile.getProperties().stream()
                 .allMatch(configProperty ->
@@ -104,7 +104,7 @@ public class ConsulServiceTest {
 
         List<ConfigProfile> allConfigProfile = consulService.getAll();
 
-        Assertions.assertEquals(2, allConfigProfile.size());
+        assertEquals(2, allConfigProfile.size());
 
         Assertions.assertTrue(Stream.of("global", "test-app").allMatch(prof ->
                         allConfigProfile.stream().anyMatch(confProf -> prof.equals(confProf.getApplication()))
@@ -145,7 +145,7 @@ public class ConsulServiceTest {
         consulService.addConfigProfile(configProfile);
 
         Optional<Value> value = client.keyValueClient().getValue("config/test-ns/test-app/my/lovely/key");
-        Assert.assertEquals(value.get().getValueAsString().orElse(null), property.getValue());
+        assertEquals(value.get().getValueAsString().orElse(null), property.getValue());
     }
 
     @Test
@@ -162,12 +162,12 @@ public class ConsulServiceTest {
         property.setValue(new String(chars));
         configProfile.setProperties(Collections.singletonList(property));
 
-        Assert.assertThrows(ConsulMigrationException.class, () -> {
+        assertThrows(ConsulMigrationException.class, () -> {
             consulService.addConfigProfile(configProfile);
         });
 
         Optional<Value> value = client.keyValueClient().getValue("config/test-ns/test-app/my/lovely/key");
-        Assert.assertFalse(value.isPresent());
+        assertFalse(value.isPresent());
     }
 
     @Test
@@ -181,8 +181,8 @@ public class ConsulServiceTest {
         Assertions.assertTrue(value2.isPresent());
 
         List<ConfigProfile> list = consulService.getAll();
-        Assertions.assertEquals(1, list.get(0).getProperties().size());
-        Assertions.assertEquals("hello world from prop", list.get(0).getProperties().get(0).getValue());
+        assertEquals(1, list.getFirst().getProperties().size());
+        assertEquals("hello world from prop", list.getFirst().getProperties().getFirst().getValue());
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class,
                 () -> consulService.cutPrefix("name", "name"));
@@ -197,7 +197,7 @@ public class ConsulServiceTest {
         property.setKey("my.lovely.key");
 
         boolean flag = consulService.isConsulAvailable();
-        Assert.assertEquals(true, flag);
+        assertTrue(flag);
     }
 
     @Test
@@ -212,7 +212,7 @@ public class ConsulServiceTest {
 
         ConfigProfile configProfile1 = consulService.getByApplicationAndProfile(configProfile.getApplication(), configProfile.getProfile());
 
-        Assert.assertEquals(configProfile.getProfile(), configProfile1.getProfile());
+        assertEquals(configProfile.getProfile(), configProfile1.getProfile());
 
     }
 
@@ -246,8 +246,8 @@ public class ConsulServiceTest {
 
         consulService.deleteProperties(configProfile1, List.of(key1, key3));
         ConfigProfile configProfile1FromConsul = consulService.getByApplicationAndProfile(application, profile1);
-        Assertions.assertFalse(configProfile1FromConsul.getPropertiesAsMap().containsKey(key1));
-        Assertions.assertFalse(configProfile1FromConsul.getPropertiesAsMap().containsKey(key3));
+        assertFalse(configProfile1FromConsul.getPropertiesAsMap().containsKey(key1));
+        assertFalse(configProfile1FromConsul.getPropertiesAsMap().containsKey(key3));
         Assertions.assertTrue(configProfile1FromConsul.getPropertiesAsMap().containsKey(key2));
         ConfigProfile configProfile2FromConsul = consulService.getByApplicationAndProfile(application, profile2);
         Assertions.assertTrue(configProfile2FromConsul.getPropertiesAsMap().containsKey(key1));

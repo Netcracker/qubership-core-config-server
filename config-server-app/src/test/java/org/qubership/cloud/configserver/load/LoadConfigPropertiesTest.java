@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 PostgresqlConfiguration.class
         }
 )
-public class LoadConfigPropertiesTest {
+class LoadConfigPropertiesTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext context;
@@ -46,7 +46,7 @@ public class LoadConfigPropertiesTest {
     private ConfigurableEnvironment environment;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MutablePropertySources propertySources = environment.getPropertySources();
         Map<String, Object> properties = new HashMap<>();
         propertySources.addFirst(new MapPropertySource("custom properties", properties));

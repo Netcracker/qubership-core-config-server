@@ -1,19 +1,20 @@
 package org.qubership.cloud.configserver;
 
+import org.junit.jupiter.api.Test;
 import org.qubership.cloud.configserver.config.SpringUtility;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import static org.junit.Assert.assertSame;
 
-public class SpringUtilityTest {
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+class SpringUtilityTest {
 
     @Autowired
     private static ApplicationContext applicationContext;
 
     @Test
-    public void applicationContextActions (){
+    void applicationContextActions() {
         SpringUtility.setApplicationContext(applicationContext);
-        assertSame(applicationContext,SpringUtility.getContext());
+        assertSame(applicationContext, SpringUtility.getContext());
     }
 }

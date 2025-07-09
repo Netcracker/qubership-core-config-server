@@ -1,15 +1,15 @@
 package org.qubership.cloud.configserver.config.service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
@@ -17,12 +17,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-public class ConsulMigrationServiceTest {
+@ExtendWith(SpringExtension.class)
+class ConsulMigrationServiceTest {
     private final static String NAMESPACE = "test-namespace";
     private static final String MIGRATED_Q = "select m from consul_migrated order by m limit 1";
 
@@ -34,16 +34,16 @@ public class ConsulMigrationServiceTest {
     @MockBean
     private ConfigPropertiesRepository pgRepository;
 
-    private ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
+    private final ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         this.consulMigrationService = new ConsulMigrationService(NAMESPACE, pgRepository, jdbcTemplate, consulService);
         when(consulService.isConsulAvailable()).thenReturn(true);
     }
 
     @Test
-    public void shouldNotMigrateIfAlreadyMigrated() {
+    void shouldNotMigrateIfAlreadyMigrated() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(true);
 
         consulMigrationService.migrateToConsul();
@@ -51,7 +51,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldNotMigrateIfNothingToMigrate() {
+    void shouldNotMigrateIfNothingToMigrate() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(false);
         when(pgRepository.findAll()).thenReturn(Collections.emptyList());
 
@@ -60,7 +60,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldSetWdAfterMigration() {
+    void shouldSetWdAfterMigration() {
         when(jdbcTemplate.queryForObject(MIGRATED_Q, Boolean.class)).thenReturn(false);
 
         consulMigrationService.migrateToConsul();
@@ -68,7 +68,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldMigratePGProperties() {
+    void shouldMigratePGProperties() {
         List<ConfigProperty> properties = new ArrayList<>(2);
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk0", "tv0", false));
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk1", "tv1", false));
@@ -84,7 +84,7 @@ public class ConsulMigrationServiceTest {
     }
 
     @Test
-    public void shouldThrowExceptionIfThereIsBigValueInProperties() {
+    void shouldThrowExceptionIfThereIsBigValueInProperties() {
         List<ConfigProperty> properties = new ArrayList<>(2);
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk0", "tv0", false));
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk1", "tv1", false));

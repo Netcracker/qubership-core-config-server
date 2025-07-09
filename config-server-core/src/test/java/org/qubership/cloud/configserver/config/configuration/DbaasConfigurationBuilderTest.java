@@ -1,11 +1,11 @@
 package org.qubership.cloud.configserver.config.configuration;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.springframework.core.env.Environment;
 
@@ -13,15 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.qubership.cloud.configserver.config.configuration.DbaasConfigurationBuilder.DB_CLASSIFIER;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
+import static org.qubership.cloud.configserver.config.configuration.DbaasConfigurationBuilder.DB_CLASSIFIER;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DbaasConfigurationBuilderTest {
+@ExtendWith(MockitoExtension.class)
+class DbaasConfigurationBuilderTest {
 
     private static final String MICROSERVICE_NAME = "config-server";
     private static final String LOCAL_DEV_NAMESPACE_ENV_KEY = "LOCALDEV_NAMESPACE";
@@ -31,10 +31,10 @@ public class DbaasConfigurationBuilderTest {
     @Mock
     private Environment environment;
 
-    private Map<String, String> properties = new HashMap<>();
+    private final Map<String, String> properties = new HashMap<>();
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() {
         properties.put("spring.application.name", MICROSERVICE_NAME);
         properties.put(LOCAL_DEV_NAMESPACE_ENV_KEY, LOCAL_DEV_NAMESPACE);
         when(environment.getProperty(anyString())).thenAnswer((Answer<String>) invocationOnMock -> {
@@ -43,14 +43,14 @@ public class DbaasConfigurationBuilderTest {
         });
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() {
         reset(environment);
         properties.clear();
     }
 
     @Test
-    public void testCreateClassifier_withTenantId() throws Exception {
+    void testCreateClassifier_withTenantId() {
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
 
         Map<String, Object> classifier = dbaasConfigurationBuilder.createClassifier(null);
@@ -62,7 +62,7 @@ public class DbaasConfigurationBuilderTest {
     }
 
     @Test
-    public void testCreateClassifier_withoutTenantId() throws Exception {
+    void testCreateClassifier_withoutTenantId() {
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
         String tenantId = UUID.randomUUID().toString();
 
@@ -75,7 +75,7 @@ public class DbaasConfigurationBuilderTest {
     }
 
     @Test
-    public void testCreateClassifier_inCloudDbAttachMode() throws Exception {
+    void testCreateClassifier_inCloudDbAttachMode() {
         properties.put(ATTACH_TO_CLOUD_DB_ENV_KEY, "true");
         DbaasConfigurationBuilder dbaasConfigurationBuilder = new DbaasConfigurationBuilder(environment);
 
