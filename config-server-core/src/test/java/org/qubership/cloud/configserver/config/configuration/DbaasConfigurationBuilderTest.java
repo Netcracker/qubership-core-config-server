@@ -20,11 +20,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
-/**
- * @author dmol0615
- * Date: 26.10.2018
- * Time: 14:15
- */
 @RunWith(MockitoJUnitRunner.class)
 public class DbaasConfigurationBuilderTest {
 
