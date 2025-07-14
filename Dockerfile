@@ -9,7 +9,7 @@ WORKDIR /app
 COPY pom.xml ./
 
 # Copy modules pom.xml
-COPY config-server-app/pom.xml ./config-server-app/ &&
+COPY config-server-app/pom.xml ./config-server-app/
 COPY config-server-core/pom.xml ./config-server-core/
 
 RUN --mount=type=secret,id=github-username \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=github-username \
     mvn dependency:go-offline -B -q
 
 # Copy source code
-COPY config-server-app/src ./config-server-app/src &&
+COPY config-server-app/src ./config-server-app/src
 COPY config-server-core/src ./config-server-core/src
 
 # Build the application
