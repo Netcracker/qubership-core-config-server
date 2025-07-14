@@ -1,0 +1,10 @@
+{
+    "components" : [
+      {
+        "name": "qubership-core-config-server",
+        "file": "./Dockerfile",
+        "context": "."
+      }
+    ],
+    "platforms" : "linux/amd64"
+  }
