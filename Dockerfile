@@ -53,4 +53,5 @@ USER 10001:0
 
 EXPOSE 8080
 
+
 CMD ["/usr/bin/java", "-Xmx512m", "-jar", "/app/config-server.jar"]
