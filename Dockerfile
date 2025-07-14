@@ -10,8 +10,7 @@ COPY pom.xml ./
 
 # Copy modules pom.xml
 COPY config-server-app/pom.xml ./config-server-app/ &&
-COPY config-server-core/pom.xml ./config-server-core/ &&
-COPY config-server-report-aggregator/pom.xml ./config-server-report-aggregator/
+COPY config-server-core/pom.xml ./config-server-core/
 
 RUN --mount=type=secret,id=github-username \
     --mount=type=secret,id=github-token \
@@ -30,8 +29,7 @@ RUN --mount=type=secret,id=github-username \
 
 # Copy source code
 COPY config-server-app/src ./config-server-app/src &&
-COPY config-server-core/src ./config-server-core/src &&
-COPY config-server-report-aggregator/src ./config-server-report-aggregator/src
+COPY config-server-core/src ./config-server-core/src
 
 # Build the application
 RUN --mount=type=cache,target=/root/.m2 \
@@ -52,6 +50,5 @@ COPY --from=build --chown=10001:0 /app/config-server-app/target/config-server-ap
 USER 10001:0
 
 EXPOSE 8080
-
 
 CMD ["/usr/bin/java", "-Xmx512m", "-jar", "/app/config-server.jar"]
