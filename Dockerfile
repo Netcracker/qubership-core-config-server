@@ -11,6 +11,7 @@ COPY pom.xml ./
 # Copy modules pom.xml
 COPY config-server-app/pom.xml ./config-server-app/
 COPY config-server-core/pom.xml ./config-server-core/
+COPY config-server-report-aggregate/pom.xml ./config-server-report-aggregate/
 
 RUN --mount=type=secret,id=github-username \
     --mount=type=secret,id=github-token \
@@ -25,15 +26,14 @@ RUN --mount=type=secret,id=github-username \
         </server>\
       </servers>\
     </settings>" > /root/.m2/settings.xml && \
-    mvn dependency:go-offline -B -q
-
+    mvn dependency:go-offline -B -q -pl '!:config-server-report-aggregate'
 # Copy source code
 COPY config-server-app/src ./config-server-app/src
 COPY config-server-core/src ./config-server-core/src
 
 # Build the application
 RUN --mount=type=cache,target=/root/.m2 \
-    mvn clean package -DskipTests -B -q
+    mvn clean package -DskipTests -B -q -pl '!:config-server-report-aggregate'
 
 #---------------------------------------------------------
 # Stage 2: Runtime image
