@@ -19,7 +19,7 @@
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.13</jacoco.plugin.version>
         <microservice.dependencies.version>11.1.1</microservice.dependencies.version>
-        <postgresql.jdbc.version>42.7.4</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.7</postgresql.jdbc.version>
         <microservice.framework.version>7.1.1</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
