@@ -10,7 +10,7 @@
 
     <groupId>org.qubership.cloud</groupId>
     <artifactId>config-server-aggregator</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.1</version>
 
     <licenses>
         <license>
@@ -55,7 +55,7 @@
         <developerConnection>scm:git:https://github.com/Netcracker/qubership-core-config-server.git
         </developerConnection>
         <url>https://github.com/Netcracker/qubership-core-config-server</url>
-        <tag>HEAD</tag>
+        <tag>3.0.1</tag>
     </scm>
 
     <distributionManagement>
