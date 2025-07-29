@@ -24,7 +24,7 @@
         "apigateway.private.url": "http://private-gateway-service:8080",
         "openshift.server.url": "https://k8s-apps.openshift.sdntest.qubership.org:6443",
         "apigateway.public.url": "http://public-gateway-service:8080",
-        "mail.cloudAdminEmail": "TestTenantManagementGroup@qubership.org"
+        "mail.cloudAdminEmail": "example@example.com"
       }
     }
   ]
