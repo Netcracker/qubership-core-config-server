@@ -1,0 +1,29 @@
+# ============== DEPLOYMENT VARIABLES ============================
+MONITORING_ENABLED: true
+CLOUD_TOPOLOGY_KEY: kubernetes.io/hostname
+READONLY_CONTAINER_FILE_SYSTEM_ENABLED: false
+IMAGE_REPOSITORY: ''
+
+# ============== SERVICE VARIABLES ============================
+LOG_LEVEL: "info"
+SERVICE_NAME: 'config-server'
+
+TRACING_ENABLED: false
+TRACING_HOST: 'nc-diagnostic-agent'
+TRACING_SAMPLER_PROBABILISTIC: 0.01
+
+NC_DIAGNOSTIC_MODE: 'off'
+NC_DIAGNOSTIC_AGENT_SERVICE: nc-diagnostic-agent
+
+VAULT_INTEGRATION: false
+
+ALLOWED_HEADERS: ''
+CLOUD_ADMIN_EMAIL: "TestTenantManagementGroup@qubership.org"
+EMAIL_FROM: "no-reply@openshift.sdntest.qubership"
+EMAIL_HOST: "iplanet.qubership.org"
+EMAIL_PASSWORD: ''  
+EMAIL_USER: ''
+
+HTTP_BUFFER_HEADER_MAX_SIZE: 10240
+
+K8S_SERVICE_TYPE: 'CLUSTER_IP'

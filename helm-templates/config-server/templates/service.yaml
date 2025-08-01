@@ -1,0 +1,49 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: '{{ .Values.SERVICE_NAME }}'
+  labels:
+    name: '{{ .Values.SERVICE_NAME }}'
+    app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
+    app.kubernetes.io/part-of: 'Cloud-Core'
+    app.kubernetes.io/managed-by: 'saasDeployer'
+    mesh.qubership.org/gateway-name: 'static-core-gateway'
+    deployment.qubership.org/sessionId: '{{ .Values.DEPLOYMENT_SESSION_ID }}'
+  annotations:
+    qubership.cloud/start.stage: '0'
+spec:
+  ports:
+    -   name: web
+        port: 8080
+        targetPort: 8080
+    -   name: tls
+        port: 8443
+        targetPort: 8443
+  selector:
+    name: 'static-core-gateway'
+  {{ if  eq .Values.K8S_SERVICE_TYPE "HEADLESS" }}
+  clusterIP: None
+  {{ end }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: '{{ .Values.SERVICE_NAME }}-internal'
+  labels:
+    name: '{{ .Values.SERVICE_NAME }}'
+    app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
+    app.kubernetes.io/part-of: 'Cloud-Core'
+    app.kubernetes.io/managed-by: 'saasDeployer'
+  annotations:
+    qubership.cloud/start.stage: '0'
+spec:
+  ports:
+    -   name: web
+        port: 8080
+        targetPort: 8080
+  selector:
+    name: '{{ .Values.SERVICE_NAME }}'
+  {{ if  eq .Values.K8S_SERVICE_TYPE "HEADLESS" }}
+  clusterIP: None
+  {{ end }}
