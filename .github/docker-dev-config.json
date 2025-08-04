@@ -3,7 +3,7 @@
       {
         "name": "qubership-core-config-server",
         "file": "./Dockerfile",
-        "context": "./artifacts/qubership-core-config-server",
+        "context": "./artifacts/qubership-core-config-server/qubership-core-config-server",
         "download-artifact": true,
         "download-artifact-path": "./artifacts/qubership-core-config-server"
       }
