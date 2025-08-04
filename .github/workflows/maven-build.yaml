@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
     types: [ opened, synchronize, reopened ]
+  workflow_dispatch:   # <-- Add this line to enable manual runs
 
 jobs:
   mvn:
@@ -22,4 +23,3 @@ jobs:
       uses: netcracker/qubership-core-infra/.github/workflows/docker-build.yaml@feature/java-service-workflow
       with:
         dry-run: false
-              
