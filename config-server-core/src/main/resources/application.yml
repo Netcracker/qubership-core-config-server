@@ -94,16 +94,6 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
 
-  cloud.config.server.vault:
-    scheme: ${VAULT_SCHEMA:http}
-    host: ${VAULT_HOST:localhost}
-    port: ${VAULT_PORT:8200}
-    authentication: KUBERNETES
-    kubernetes:
-      kubernetesPath: nc-${spring.application.server_hostname}_${spring.application.namespace}
-      role: ${spring.application.name}
-      serviceAccountTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-
 identity:
   provider: ${IDENTITY_PROVIDER:keycloak}
 

@@ -15,8 +15,6 @@ TRACING_SAMPLER_PROBABILISTIC: 0.01
 NC_DIAGNOSTIC_MODE: 'off'
 NC_DIAGNOSTIC_AGENT_SERVICE: nc-diagnostic-agent
 
-VAULT_INTEGRATION: false
-
 ALLOWED_HEADERS: ''
 CLOUD_ADMIN_EMAIL: "TestTenantManagementGroup@qubership.org"
 EMAIL_FROM: "no-reply@openshift.sdntest.qubership"
