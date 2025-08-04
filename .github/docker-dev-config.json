@@ -1,0 +1,12 @@
+{
+    "components" : [
+      {
+        "name": "qubership-core-config-server",
+        "file": "./Dockerfile",
+        "context": ".",
+        "download-artifact": true,
+        "download-artifact-path": "./artifacts/qubership-core-config-server"
+      }
+    ],
+    "platforms" : "linux/amd64"
+  }
