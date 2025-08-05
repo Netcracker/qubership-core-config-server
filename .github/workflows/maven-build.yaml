@@ -13,7 +13,6 @@ jobs:
       actor: ${{ github.actor }}
       sonar-project-key: ${{ vars.SONAR_PROJECT_KEY }}
       upload-artifact: true
-      upload-artifact-name: qubership-core-config-server
     secrets:
       sonar-token: ${{ secrets.SONAR_TOKEN }}
 

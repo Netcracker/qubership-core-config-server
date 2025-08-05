@@ -3,9 +3,8 @@
       {
         "name": "qubership-core-config-server",
         "file": "./Dockerfile",
-        "context": "./artifacts/qubership-core-config-server/",
-        "download-artifact": true,
-        "download-artifact-path": "./artifacts"
+        "context": "./artifacts/pre-built-artifact/",
+        "download-artifact": true
       }
     ],
     "platforms" : "linux/amd64"
