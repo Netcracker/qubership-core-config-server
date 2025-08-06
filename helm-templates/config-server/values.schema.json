@@ -44,8 +44,6 @@
       "ARTIFACT_DESCRIPTOR_VERSION": "",
       "MONITORING_ENABLED": false,
       "CLOUD_TOPOLOGY_KEY": "kubernetes.io/hostname",
-      "VAULT_INTEGRATION": false,
-      "VAULT_ADDR": "",
       "PAAS_VERSION": "",
       "HTTP_BUFFER_HEADER_MAX_SIZE": 10240,
       "K8S_SERVICE_TYPE": "CLUSTER_IP"
@@ -413,15 +411,6 @@
         "kubernetes.io/hostname"
       ]
     },
-    "VAULT_INTEGRATION": {
-      "$id": "#/properties/VAULT_INTEGRATION",
-      "$ref": "#/definitions/booleanOrString",
-      "description": "Is integration with Vault enabled.",
-      "examples": [
-        false
-      ],
-      "title": "The VAULT_INTEGRATION schema"
-    },
     "READONLY_CONTAINER_FILE_SYSTEM_ENABLED": {
       "$id": "#/properties/READONLY_CONTAINER_FILE_SYSTEM_ENABLED",
       "$ref": "#/definitions/booleanOrString",
@@ -449,13 +438,6 @@
       "type": "string",
       "title": "The SERVICE_NAME schema",
       "description": "Name of a service.",
-      "internal": true
-    },
-    "VAULT_ADDR": {
-      "$id": "#/properties/VAULT_ADDR",
-      "type": "string",
-      "title": "The VAULT_ADDR schema",
-      "description": "Vault address",
       "internal": true
     },
     "CONSUL_ENABLED": {
