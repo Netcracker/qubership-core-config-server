@@ -65,7 +65,7 @@ public class MigrationConfiguration {
                 .baselineOnMigrate(true)
                 .validateOnMigrate(false)
                 .group(true)
-                .locations("classpath:db/migration/postgresql", "classpath:org/qubership/cloud/configserver/config/migration");
+                .locations("classpath:db/migration/postgresql", "classpath:com/netcracker/cloud/configserver/config/migration");
     }
 
     //This bean runs other migrations after init all beans

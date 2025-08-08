@@ -14,7 +14,7 @@ This project consists of two modules: `config-server-app` and `config-server-cor
 
 ### config-server-app
 
-- **Source Directory**: `src/main/java/org/qubership/cloud/configserver`
+- **Source Directory**: `src/main/java/com/netcracker/cloud/configserver`
 - **Main Application Class**: `Application.java`
 - **Dependencies**:
   - `config-server-core`
@@ -24,7 +24,7 @@ This project consists of two modules: `config-server-app` and `config-server-cor
 
 ### config-server-core
 
-- **Source Directory**: `src/main/java/org/qubership/cloud/configserver`
+- **Source Directory**: `src/main/java/com/netcracker/cloud/configserver`
 - **Key Components**:
   - **Monitoring**: Contains classes like `PostgreSqlDbHealthCheck` and `HealthCheckStatus`.
   - **Encryption**: Contains `EncryptionService` and related configuration classes.

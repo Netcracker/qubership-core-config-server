@@ -82,7 +82,7 @@ class MigrationConfigurationTest {
             Method initMethod = migrationConfiguration.getClass().getDeclaredMethod("init", cArg);
             initMethod.setAccessible(true);
             FluentConfiguration fluentConfiguration = (FluentConfiguration) fluentConfigurationMethod.invoke(migrationConfiguration, postgresqlConfiguration.testDataSource());
-            String[] expectedLocations = {"classpath:db/migration/postgresql", "classpath:org/qubership/cloud/configserver/config/migration"};
+            String[] expectedLocations = {"classpath:db/migration/postgresql", "classpath:com/netcracker/cloud/configserver/config/migration"};
             assertEquals(2, fluentConfiguration.getLocations().length);
             ArrayUtils.contains(expectedLocations, fluentConfiguration.getLocations()[0].toString());
             ArrayUtils.contains(expectedLocations, fluentConfiguration.getLocations()[1].toString());
