@@ -1,14 +1,14 @@
 package com.netcracker.cloud.configserver.config.service;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 
-import static org.qubership.cloud.configserver.config.service.ConsulMigrationValidator.VALUE_SIZE_ALARM;
+import static com.netcracker.cloud.configserver.config.service.ConsulMigrationValidator.VALUE_SIZE_ALARM;
 
 class ConsulMigrationValidatorTest {
 

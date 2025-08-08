@@ -17,7 +17,7 @@ import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("org.qubership.cloud.configserver.config.repository")
+@EnableJpaRepositories("com.netcracker.cloud.configserver.config.repository")
 public class PostgresqlConfiguration {
 
     @Bean
@@ -25,7 +25,7 @@ public class PostgresqlConfiguration {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(testDataSource());
-        em.setPackagesToScan("org.qubership.cloud.configserver.config");
+        em.setPackagesToScan("com.netcracker.cloud.configserver.config");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.service;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.ConsulException;
 import com.orbitz.consul.model.kv.ImmutableOperation;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
+import static com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
 import static com.orbitz.consul.model.kv.Verb.DELETE;
 import static com.orbitz.consul.model.kv.Verb.SET;
 

@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.service;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
 import lombok.Getter;
 
 import java.nio.charset.StandardCharsets;

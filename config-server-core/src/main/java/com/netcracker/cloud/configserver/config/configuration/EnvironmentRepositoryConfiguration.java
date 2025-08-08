@@ -1,11 +1,11 @@
 package com.netcracker.cloud.configserver.config.configuration;
 
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.ConsulConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository;
-import org.qubership.cloud.configserver.config.repository.ExtendedConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.JpaConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.service.ConsulService;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.ConsulConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository;
+import com.netcracker.cloud.configserver.config.repository.ExtendedConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.JpaConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.service.ConsulService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
 import org.springframework.cloud.config.server.environment.SearchPathLocator;

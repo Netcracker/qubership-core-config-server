@@ -10,7 +10,7 @@
         <queueSize>5000</queueSize>
         <appender-ref ref="STDOUT" />
     </appender>
-	<logger name="org.qubership" level="${log.level.qubership:-INFO}"/>
+	<logger name="com.netcracker" level="${log.level.qubership:-INFO}"/>
 	
     <root level="${log.level:-INFO}">
         <appender-ref ref="ASYNC"/>

@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.service;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 

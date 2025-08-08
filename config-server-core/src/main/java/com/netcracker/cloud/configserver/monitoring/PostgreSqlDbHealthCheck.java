@@ -1,9 +1,9 @@
 package com.netcracker.cloud.configserver.monitoring;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository;
-import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository;
+import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;

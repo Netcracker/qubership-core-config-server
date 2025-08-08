@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.repository;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.service.ConsulService;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.service.ConsulService;
 
 import java.util.Collections;
 import java.util.List;

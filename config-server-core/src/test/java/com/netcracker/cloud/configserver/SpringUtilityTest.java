@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver;
 
 import org.junit.jupiter.api.Test;
-import org.qubership.cloud.configserver.config.SpringUtility;
+import com.netcracker.cloud.configserver.config.SpringUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 

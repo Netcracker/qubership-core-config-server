@@ -1,8 +1,8 @@
 package com.netcracker.cloud.configserver.config.migration;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.SpringUtility;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.SpringUtility;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.api.migration.BaseJavaMigration;

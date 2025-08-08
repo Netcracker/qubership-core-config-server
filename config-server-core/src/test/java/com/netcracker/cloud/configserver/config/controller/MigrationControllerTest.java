@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.controller;
 
 import org.junit.jupiter.api.Test;
-import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
+import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

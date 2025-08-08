@@ -5,10 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.dao.DataAccessResourceFailureException;
 

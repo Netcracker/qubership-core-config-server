@@ -9,9 +9,9 @@ import org.mockito.Mockito;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.model.Header;
 import org.mockserver.model.HttpResponse;
-import org.qubership.cloud.dbaas.client.DbaasClient;
-import org.qubership.cloud.dbaas.client.entity.database.PostgresDatabase;
-import org.qubership.cloud.dbaas.client.entity.database.type.PostgresDBType;
+import com.netcracker.cloud.dbaas.client.DbaasClient;
+import com.netcracker.cloud.dbaas.client.entity.database.PostgresDatabase;
+import com.netcracker.cloud.dbaas.client.entity.database.type.PostgresDBType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
@@ -50,7 +50,7 @@ class PostgresqlConfigurationTest {
 
     @Test
     void entityManagerFactoryTest() {
-        org.qubership.cloud.configserver.PostgresqlConfiguration dataPostgresqlConfiguration = new org.qubership.cloud.configserver.PostgresqlConfiguration();
+        com.netcracker.cloud.configserver.PostgresqlConfiguration dataPostgresqlConfiguration = new com.netcracker.cloud.configserver.PostgresqlConfiguration();
         DataSource dataSource = dataPostgresqlConfiguration.testDataSource();
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = postgresqlConfiguration.entityManagerFactory(dataSource);
         assertNotNull(localContainerEntityManagerFactoryBean);
@@ -64,7 +64,7 @@ class PostgresqlConfigurationTest {
             Field packagesToScan = defaultPersistenceUnitManager.getClass().getDeclaredField("packagesToScan");
             packagesToScan.setAccessible(true);
             String[] packagesToScanString = (String[]) packagesToScan.get(defaultPersistenceUnitManager);
-            assertEquals("org.qubership.cloud.configserver.config", packagesToScanString[0]);
+            assertEquals("com.netcracker.cloud.configserver.config", packagesToScanString[0]);
             assertSame(dataSource, localContainerEntityManagerFactoryBean.getDataSource());
         } catch (Exception e) {
             e.printStackTrace();

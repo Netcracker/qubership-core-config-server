@@ -1,8 +1,8 @@
 package com.netcracker.cloud.configserver.config.configuration;
 
-import org.qubership.cloud.restclient.MicroserviceRestClient;
-import org.qubership.cloud.restclient.MicroserviceRestClientFactory;
-import org.qubership.cloud.restclient.webclient.MicroserviceWebClient;
+import com.netcracker.cloud.restclient.MicroserviceRestClient;
+import com.netcracker.cloud.restclient.MicroserviceRestClientFactory;
+import com.netcracker.cloud.restclient.webclient.MicroserviceWebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;

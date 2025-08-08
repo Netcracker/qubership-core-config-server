@@ -1,11 +1,11 @@
 package com.netcracker.cloud.configserver.config.configuration;
 
-import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
+import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import static org.qubership.cloud.configserver.config.service.ConsulMigrationService.NEED_MIGRATION_Q;
+import static com.netcracker.cloud.configserver.config.service.ConsulMigrationService.NEED_MIGRATION_Q;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

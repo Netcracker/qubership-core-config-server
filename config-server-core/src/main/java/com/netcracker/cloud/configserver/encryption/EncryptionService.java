@@ -1,6 +1,6 @@
 package com.netcracker.cloud.configserver.encryption;
 
-import org.qubership.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
 
 import java.util.Map;
 

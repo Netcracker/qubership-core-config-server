@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.encryption.service;
 
-import org.qubership.cloud.configserver.config.ConfigProperty;
-import org.qubership.cloud.configserver.encryption.EncryptionService;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.encryption.EncryptionService;
 
 import lombok.extern.slf4j.Slf4j;
 

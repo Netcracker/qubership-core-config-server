@@ -1,6 +1,6 @@
 package com.netcracker.cloud.configserver.config.controller;
 
-import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
+import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;

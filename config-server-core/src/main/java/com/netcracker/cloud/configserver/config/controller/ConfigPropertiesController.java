@@ -1,12 +1,12 @@
 package com.netcracker.cloud.configserver.config.controller;
 
-import org.qubership.cloud.configserver.config.ApplicationWithProfiles;
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigPropertiesValidator;
-import org.qubership.cloud.configserver.config.ConfigProperty;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.repository.ExtendedConfigPropertiesRepository;
-import org.qubership.cloud.configserver.encryption.EncryptionService;
+import com.netcracker.cloud.configserver.config.ApplicationWithProfiles;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigPropertiesValidator;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.repository.ExtendedConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.encryption.EncryptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,14 +1,14 @@
 package com.netcracker.config;
 
-import org.qubership.cloud.configserver.PostgresqlConfiguration;
-import org.qubership.cloud.configserver.config.configuration.ConsulConfiguration;
-import org.qubership.cloud.configserver.config.controller.ConfigPropertiesController;
-import org.qubership.cloud.configserver.config.pojo.ConfigServerConfig;
-import org.qubership.cloud.configserver.config.repository.*;
-import org.qubership.cloud.configserver.config.service.ConsulService;
-import org.qubership.cloud.configserver.encryption.EncryptionService;
-import org.qubership.cloud.configserver.encryption.configuration.NoopEncryptionConfiguration;
-import org.qubership.cloud.configserver.util.TestUtils;
+import com.netcracker.cloud.configserver.PostgresqlConfiguration;
+import com.netcracker.cloud.configserver.config.configuration.ConsulConfiguration;
+import com.netcracker.cloud.configserver.config.controller.ConfigPropertiesController;
+import com.netcracker.cloud.configserver.config.pojo.ConfigServerConfig;
+import com.netcracker.cloud.configserver.config.repository.*;
+import com.netcracker.cloud.configserver.config.service.ConsulService;
+import com.netcracker.cloud.configserver.encryption.EncryptionService;
+import com.netcracker.cloud.configserver.encryption.configuration.NoopEncryptionConfiguration;
+import com.netcracker.cloud.configserver.util.TestUtils;
 
 import jakarta.annotation.Nonnull;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,8 @@ package com.netcracker.cloud.configserver.config.service;
 
 import com.google.common.net.HostAndPort;
 import org.junit.jupiter.api.*;
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.config.CacheConfig;
 import com.orbitz.consul.config.ClientConfig;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.qubership.cloud.configserver.config.service.ConsulService.CONSUL_CONFIG_PREFIX;
+import static com.netcracker.cloud.configserver.config.service.ConsulService.CONSUL_CONFIG_PREFIX;
 
 class ConsulServiceTest {
 

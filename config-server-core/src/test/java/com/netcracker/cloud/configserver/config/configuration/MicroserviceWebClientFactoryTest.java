@@ -4,14 +4,14 @@ import io.fabric8.mockwebserver.DefaultMockServer;
 import io.fabric8.mockwebserver.MockServer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.qubership.cloud.restclient.MicroserviceRestClient;
-import org.qubership.cloud.restclient.entity.RestClientResponseEntity;
-import org.qubership.cloud.restclient.exception.MicroserviceRestClientResponseException;
+import com.netcracker.cloud.restclient.MicroserviceRestClient;
+import com.netcracker.cloud.restclient.entity.RestClientResponseEntity;
+import com.netcracker.cloud.restclient.exception.MicroserviceRestClientResponseException;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.qubership.cloud.restclient.HttpMethod.GET;
+import static com.netcracker.cloud.restclient.HttpMethod.GET;
 
 class MicroserviceWebClientFactoryTest {
 

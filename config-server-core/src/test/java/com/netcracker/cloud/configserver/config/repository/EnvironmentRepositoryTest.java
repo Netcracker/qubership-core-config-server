@@ -3,9 +3,9 @@ package com.netcracker.cloud.configserver.config.repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.qubership.cloud.configserver.config.ConfigProperty;
-import org.qubership.cloud.configserver.util.TestUtils;
-import org.qubership.config.UnitTestApplicationConfig;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.util.TestUtils;
+import com.netcracker.config.UnitTestApplicationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.config.environment.Environment;
@@ -21,8 +21,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME;
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
+import static com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME;
+import static com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UnitTestApplicationConfig.class})

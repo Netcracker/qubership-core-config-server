@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
-import static org.qubership.cloud.configserver.config.configuration.DbaasConfigurationBuilder.DB_CLASSIFIER;
+import static com.netcracker.cloud.configserver.config.configuration.DbaasConfigurationBuilder.DB_CLASSIFIER;
 
 @ExtendWith(MockitoExtension.class)
 class DbaasConfigurationBuilderTest {

@@ -6,10 +6,10 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.qubership.cloud.configserver.PostgresqlConfiguration;
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.ConfigProperty;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.PostgresqlConfiguration;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.ConfigProperty;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -32,7 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.qubership.cloud.configserver.config.configuration.MigrationConfiguration.NEED_BASELINE_MIGRATION_Q;
+import static com.netcracker.cloud.configserver.config.configuration.MigrationConfiguration.NEED_BASELINE_MIGRATION_Q;
 
 class MigrationConfigurationTest {
 

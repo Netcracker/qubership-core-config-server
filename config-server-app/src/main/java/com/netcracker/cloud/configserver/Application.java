@@ -1,8 +1,8 @@
 package com.netcracker.cloud.configserver;
 
-import org.qubership.cloud.log.manager.spring.LoggingFilter;
-import org.qubership.cloud.microserviceframework.BaseApplicationOnRestTemplate;
-import org.qubership.cloud.microserviceframework.application.MicroserviceApplicationBuilder;
+import com.netcracker.cloud.log.manager.spring.LoggingFilter;
+import com.netcracker.cloud.microserviceframework.BaseApplicationOnRestTemplate;
+import com.netcracker.cloud.microserviceframework.application.MicroserviceApplicationBuilder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 

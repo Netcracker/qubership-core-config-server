@@ -1,12 +1,12 @@
 package com.netcracker.cloud.configserver.config.configuration;
 
 import com.google.common.net.HostAndPort;
-import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
-import org.qubership.cloud.configserver.config.service.ConsulService;
+import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
+import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
+import com.netcracker.cloud.configserver.config.service.ConsulService;
 import com.orbitz.consul.Consul;
 import lombok.extern.slf4j.Slf4j;
-import org.qubership.cloud.security.core.utils.tls.TlsUtils;
+import com.netcracker.cloud.security.core.utils.tls.TlsUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,7 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.net.URL;
 
-import static org.qubership.cloud.configserver.config.service.ConsulMigrationService.NEED_MIGRATION_Q;
+import static com.netcracker.cloud.configserver.config.service.ConsulMigrationService.NEED_MIGRATION_Q;
 
 @Slf4j
 @Configuration

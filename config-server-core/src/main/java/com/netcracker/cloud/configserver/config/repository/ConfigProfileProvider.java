@@ -1,7 +1,7 @@
 package com.netcracker.cloud.configserver.config.repository;
 
-import org.qubership.cloud.configserver.config.ConfigProfile;
-import org.qubership.cloud.configserver.config.service.ConsulService;
+import com.netcracker.cloud.configserver.config.ConfigProfile;
+import com.netcracker.cloud.configserver.config.service.ConsulService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
-import static org.qubership.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
-import static org.qubership.cloud.configserver.config.service.ConsulService.CONSUL_GLOBAL_APPLICATION_NAME;
+import static com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository.CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME;
+import static com.netcracker.cloud.configserver.config.service.ConsulService.CONSUL_GLOBAL_APPLICATION_NAME;
 
 @Slf4j
 @Component

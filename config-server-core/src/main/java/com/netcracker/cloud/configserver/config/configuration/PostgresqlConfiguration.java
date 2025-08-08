@@ -10,12 +10,12 @@ import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder;
 import org.apache.hc.core5.http.ssl.TLS;
-import org.qubership.cloud.dbaas.client.DbaasClient;
-import org.qubership.cloud.dbaas.client.DbaasClientImpl;
-import org.qubership.cloud.dbaas.client.config.EnableServiceDbaasPostgresql;
-import org.qubership.cloud.restclient.MicroserviceRestClient;
-import org.qubership.cloud.restclient.resttemplate.MicroserviceRestTemplate;
-import org.qubership.cloud.security.core.utils.tls.TlsUtils;
+import com.netcracker.cloud.dbaas.client.DbaasClient;
+import com.netcracker.cloud.dbaas.client.DbaasClientImpl;
+import com.netcracker.cloud.dbaas.client.config.EnableServiceDbaasPostgresql;
+import com.netcracker.cloud.restclient.MicroserviceRestClient;
+import com.netcracker.cloud.restclient.resttemplate.MicroserviceRestTemplate;
+import com.netcracker.cloud.security.core.utils.tls.TlsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ import java.util.HashMap;
 @Configuration
 // vaultTemplate will be provided by SpringVaultClientConfiguration
 @EnableServiceDbaasPostgresql
-@EnableJpaRepositories("org.qubership.cloud.configserver.config.repository")
+@EnableJpaRepositories("com.netcracker.cloud.configserver.config.repository")
 public class PostgresqlConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(PostgresqlConfiguration.class);
@@ -65,7 +65,7 @@ public class PostgresqlConfiguration {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dbaasPostgresDataSource);
-        em.setPackagesToScan("org.qubership.cloud.configserver.config");
+        em.setPackagesToScan("com.netcracker.cloud.configserver.config");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
