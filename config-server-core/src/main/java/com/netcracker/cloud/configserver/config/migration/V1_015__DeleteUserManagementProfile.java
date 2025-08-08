@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.migration;
+package com.netcracker.cloud.configserver.config.migration;
 
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.SpringUtility;

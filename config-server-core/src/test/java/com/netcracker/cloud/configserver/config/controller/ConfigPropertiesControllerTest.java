@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.controller;
+package com.netcracker.cloud.configserver.config.controller;
 
 import nl.altindag.log.LogCaptor;
 import org.junit.jupiter.api.AfterEach;

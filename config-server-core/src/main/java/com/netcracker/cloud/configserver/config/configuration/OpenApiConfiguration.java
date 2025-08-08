@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.configuration;
+package com.netcracker.cloud.configserver.config.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

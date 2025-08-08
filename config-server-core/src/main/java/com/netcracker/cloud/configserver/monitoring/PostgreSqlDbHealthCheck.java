@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.monitoring;
+package com.netcracker.cloud.configserver.monitoring;
 
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;

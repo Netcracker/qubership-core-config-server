@@ -1,4 +1,4 @@
-package org.qubership.config;
+package com.netcracker.config;
 
 import org.qubership.cloud.configserver.PostgresqlConfiguration;
 import org.qubership.cloud.configserver.config.configuration.ConsulConfiguration;

@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config;
+package com.netcracker.cloud.configserver.config;
 
 import lombok.Data;
 import lombok.NonNull;

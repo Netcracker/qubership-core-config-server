@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.configuration;
+package com.netcracker.cloud.configserver.config.configuration;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.flywaydb.core.Flyway;

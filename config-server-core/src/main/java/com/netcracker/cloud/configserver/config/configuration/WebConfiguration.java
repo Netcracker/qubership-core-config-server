@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.configuration;
+package com.netcracker.cloud.configserver.config.configuration;
 
 import org.qubership.cloud.restclient.MicroserviceRestClientFactory;
 import org.springframework.beans.factory.annotation.Value;

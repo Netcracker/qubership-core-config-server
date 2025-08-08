@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.encryption.service;
+package com.netcracker.cloud.configserver.encryption.service;
 
 import org.qubership.cloud.configserver.config.ConfigProperty;
 import org.qubership.cloud.configserver.encryption.EncryptionService;

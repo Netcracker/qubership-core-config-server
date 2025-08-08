@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.pojo;
+package com.netcracker.cloud.configserver.config.pojo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

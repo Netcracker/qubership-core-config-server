@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.controller;
+package com.netcracker.cloud.configserver.config.controller;
 
 import org.qubership.cloud.configserver.config.service.ConsulMigrationService;
 import io.swagger.v3.oas.annotations.Operation;

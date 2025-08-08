@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.controller;
+package com.netcracker.cloud.configserver.config.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;

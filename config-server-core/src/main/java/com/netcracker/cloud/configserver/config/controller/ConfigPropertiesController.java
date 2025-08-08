@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.controller;
+package com.netcracker.cloud.configserver.config.controller;
 
 import org.qubership.cloud.configserver.config.ApplicationWithProfiles;
 import org.qubership.cloud.configserver.config.ConfigProfile;

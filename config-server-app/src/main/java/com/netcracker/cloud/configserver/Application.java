@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver;
+package com.netcracker.cloud.configserver;
 
 import org.qubership.cloud.log.manager.spring.LoggingFilter;
 import org.qubership.cloud.microserviceframework.BaseApplicationOnRestTemplate;

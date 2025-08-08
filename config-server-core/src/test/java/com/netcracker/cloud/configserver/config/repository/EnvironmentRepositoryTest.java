@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.repository;
+package com.netcracker.cloud.configserver.config.repository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

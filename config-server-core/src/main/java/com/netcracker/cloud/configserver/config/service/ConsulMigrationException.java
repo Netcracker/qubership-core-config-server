@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.service;
+package com.netcracker.cloud.configserver.config.service;
 
 public class ConsulMigrationException extends RuntimeException {
 

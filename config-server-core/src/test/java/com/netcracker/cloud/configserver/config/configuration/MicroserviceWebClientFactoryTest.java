@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.configuration;
+package com.netcracker.cloud.configserver.config.configuration;
 
 import io.fabric8.mockwebserver.DefaultMockServer;
 import io.fabric8.mockwebserver.MockServer;

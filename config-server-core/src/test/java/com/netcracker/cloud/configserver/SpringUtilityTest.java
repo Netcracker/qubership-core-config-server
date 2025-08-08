@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver;
+package com.netcracker.cloud.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.qubership.cloud.configserver.config.SpringUtility;

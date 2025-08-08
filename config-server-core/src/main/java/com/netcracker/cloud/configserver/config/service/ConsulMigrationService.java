@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.service;
+package com.netcracker.cloud.configserver.config.service;
 
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.qubership.cloud.configserver.config.repository.ConfigPropertiesRepository;

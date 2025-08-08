@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.configuration;
+package com.netcracker.cloud.configserver.config.configuration;
 
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

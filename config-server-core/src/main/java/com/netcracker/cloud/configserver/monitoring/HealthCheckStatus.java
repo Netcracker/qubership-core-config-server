@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.monitoring;
+package com.netcracker.cloud.configserver.monitoring;
 
 public enum HealthCheckStatus {
     WARNING,

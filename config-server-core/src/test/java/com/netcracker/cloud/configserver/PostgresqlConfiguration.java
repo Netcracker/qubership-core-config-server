@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver;
+package com.netcracker.cloud.configserver;
 
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;

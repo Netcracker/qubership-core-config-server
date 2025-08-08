@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.monitoring;
+package com.netcracker.cloud.configserver.monitoring;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

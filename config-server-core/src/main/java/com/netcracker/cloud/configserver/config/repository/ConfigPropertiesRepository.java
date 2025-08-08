@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.config.repository;
+package com.netcracker.cloud.configserver.config.repository;
 
 import org.qubership.cloud.configserver.config.ConfigProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
