@@ -164,22 +164,12 @@ spec:
                     value: '{{ .Values.CLOUD_API_PORT }}'
                 -   name: CLOUD_PROTOCOL
                     value: '{{ .Values.CLOUD_PROTOCOL }}'
-                -   name: VAULT_INTEGRATION
-                    value: '{{ .Values.VAULT_INTEGRATION }}'
                 -   name: NC_DIAGNOSTIC_MODE
                     value: '{{ .Values.NC_DIAGNOSTIC_MODE }}'
                 -   name: NC_DIAGNOSTIC_AGENT_SERVICE
                     value: '{{ .Values.NC_DIAGNOSTIC_AGENT_SERVICE }}'
                 -   name: BASELINE_PROJ
                     value: '{{ .Values.BASELINE_PROJ }}'
-                {{ if .Values.VAULT_ADDR }}
-                -   name: VAULT_SCHEMA
-                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${2}" }}'
-                -   name: VAULT_HOST
-                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${3}" }}'
-                -   name: VAULT_PORT
-                    value: '{{ regexReplaceAll "^((.*)://)?([A-Za-z0-9\\-\\.]+)(:([0-9]+))?$" .Values.VAULT_ADDR "${5}" }}'
-                {{ end }}
                 -   name: CONSUL_ENABLED
                     value: '{{ .Values.CONSUL_ENABLED | default false }}'
                 {{ if .Values.CONSUL_ENABLED }}

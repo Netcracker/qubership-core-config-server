@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>config-server-aggregator</artifactId>
-        <groupId>org.qubership.cloud</groupId>
+        <groupId>com.netcracker.cloud</groupId>
         <version>3.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -18,16 +18,16 @@
         <system-stubs.version>2.1.8</system-stubs.version>
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.13</jacoco.plugin.version>
-        <microservice.dependencies.version>11.1.1</microservice.dependencies.version>
+        <microservice.dependencies.version>11.1.2-SNAPSHOT</microservice.dependencies.version>
         <postgresql.jdbc.version>42.7.7</postgresql.jdbc.version>
-        <microservice.framework.version>7.1.1</microservice.framework.version>
+        <microservice.framework.version>7.1.2-SNAPSHOT</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.qubership.cloud</groupId>
+                <groupId>com.netcracker.cloud</groupId>
                 <artifactId>cloud-core-java-bom</artifactId>
                 <version>${microservice.dependencies.version}</version>
                 <type>pom</type>
@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2024.0.1</version>
+                <version>2024.0.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -112,7 +112,7 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.qubership.cloud</groupId>
+            <groupId>com.netcracker.cloud</groupId>
             <artifactId>dbaas-client-postgres-starter</artifactId>
             <exclusions>
                 <exclusion>
@@ -122,14 +122,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.qubership.cloud</groupId>
+            <groupId>com.netcracker.cloud</groupId>
             <artifactId>logger-manager-spring</artifactId>
-            <version>6.1.1</version>
+            <version>6.1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.qubership.cloud</groupId>
+            <groupId>com.netcracker.cloud</groupId>
             <artifactId>webclient</artifactId>
-            <version>6.1.1</version>
+            <version>6.1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -190,12 +190,12 @@
             <version>10.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.qubership.cloud</groupId>
+            <groupId>com.netcracker.cloud</groupId>
             <artifactId>microservice-framework-resttemplate</artifactId>
             <version>${microservice.framework.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.qubership.cloud</groupId>
+                    <groupId>com.netcracker.cloud</groupId>
                     <artifactId>config-server-loader-resttemplate</artifactId>
                 </exclusion>
                 <exclusion>
@@ -203,11 +203,11 @@
                     <artifactId>springfox-boot-starter</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.qubership.cloud</groupId>
+                    <groupId>com.netcracker.cloud</groupId>
                     <artifactId>dbaas-client-mongo-starter</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.qubership.cloud</groupId>
+                    <groupId>com.netcracker.cloud</groupId>
                     <artifactId>mongo-evolution-spring</artifactId>
                 </exclusion>
             </exclusions>
@@ -320,7 +320,7 @@
         <dependency>
             <groupId>io.github.hakky54</groupId>
             <artifactId>logcaptor</artifactId>
-            <version>2.11.0</version>
+            <version>2.12.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -37,7 +37,7 @@ RUN --mount=type=cache,target=/root/.m2 \
 
 #---------------------------------------------------------
 # Stage 2: Runtime image
-FROM ghcr.io/netcracker/qubership/java-base:1.0.0
+FROM ghcr.io/netcracker/qubership/java-base:1.1.2
 LABEL maintainer="qubership"
 
 # Set working directory
