@@ -34,7 +34,6 @@
       "PRIVATE_GATEWAY_URL": "",
       "PUBLIC_GATEWAY_URL": "",
       "REPLICAS": 1,
-      "SSL_SECRET": "defaultsslcertificate",
       "TAG": "",
       "XNIO_IO_THREAD": 14,
       "XNIO_WORK_THREAD": 112,
@@ -330,16 +329,6 @@
       "envSpecific": true,
       "internal": true,
       "title": "The REPLICAS schema"
-    },
-    "SSL_SECRET": {
-      "$id": "#/properties/SSL_SECRET",
-      "type": "string",
-      "title": "The SSL_SECRET schema",
-      "description": "SSL secret name.",
-      "examples": [
-        "defaultsslcertificate"
-      ],
-      "internal": true
     },
     "TAG": {
       "$id": "#/properties/TAG",
