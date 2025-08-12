@@ -1,4 +1,4 @@
-package org.qubership.cloud.configserver.load.config;
+package com.netcracker.cloud.configserver.load.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class JpaConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("org.qubership.cloud.configserver.config");
+        em.setPackagesToScan("com.netcracker.cloud.configserver.config");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         return em;
