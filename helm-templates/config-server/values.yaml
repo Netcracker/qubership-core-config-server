@@ -18,7 +18,7 @@ NC_DIAGNOSTIC_AGENT_SERVICE: nc-diagnostic-agent
 ALLOWED_HEADERS: ''
 CLOUD_ADMIN_EMAIL: "TestTenantManagementGroup@qubership.org"
 EMAIL_FROM: "no-reply@openshift.sdntest.qubership"
-EMAIL_HOST: "iplanet.qubership.org"
+EMAIL_HOST: "iplanet.netcracker.com"
 EMAIL_PASSWORD: ''  
 EMAIL_USER: ''
 
