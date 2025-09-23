@@ -46,7 +46,6 @@ public class PostgresqlConfiguration {
         Flyway flyway = Flyway.configure()
                 .dataSource(testDataSource())
                 .baselineOnMigrate(true)
-                .cleanOnValidationError(true)
                 .target("1.001")
                 .cleanDisabled(false)
                 .locations("classpath:db/migration/postgresql")
