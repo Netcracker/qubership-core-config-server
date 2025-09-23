@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.netcracker.cloud</groupId>
         <artifactId>config-server-aggregator</artifactId>
-        <version>3.0.2-SNAPSHOT</version>
+        <version>3.0.2</version>
     </parent>
 
     <artifactId>config-server-app</artifactId>
