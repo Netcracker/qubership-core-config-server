@@ -22,7 +22,7 @@
       "CPU_REQUEST": "100m",
       "CPU_LIMIT": "4",
       "EMAIL_FROM": "no-reply@openshift.sdntest.qubership",
-      "EMAIL_HOST": "iplanet.netcracker.com",
+      "EMAIL_HOST": "mail.example.com",
       "EMAIL_PASSWORD": "",
       "EMAIL_USER": "",
       "IMAGE_REPOSITORY": "",
@@ -269,7 +269,7 @@
       "title": "The EMAIL_HOST schema",
       "description": "Email server host.",
       "examples": [
-        "iplanet.netcracker.com"
+        "mail.example.com"
       ]
     },
     "EMAIL_PASSWORD": {
