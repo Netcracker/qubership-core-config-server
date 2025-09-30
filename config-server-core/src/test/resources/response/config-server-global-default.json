@@ -12,7 +12,7 @@
       "source": {
         "tenant.default.id": "tenant.default.id.val",
         "idp.gateway.clientSecret": "",
-        "mail.server.host": "iplanet.netcracker.com",
+        "mail.server.host": "mail.example.com",
         "mail.server.auth": "false",
         "management.health.mongo.enabled": "false",
         "bss.tenant.default-id": "bss.tenant.default-id.val",
@@ -22,7 +22,7 @@
         "mail.server.user": "admin",
         "error.page.customerSpecifier": "default",
         "apigateway.private.url": "http://private-gateway-service:8080",
-        "openshift.server.url": "https://k8s-apps.openshift.sdntest.netcracker.com:6443",
+        "openshift.server.url": "https://k8s-apps.openshift.qubership.org:6443",
         "apigateway.public.url": "http://public-gateway-service:8080",
         "mail.cloudAdminEmail": "example@example.com"
       }
