@@ -19,7 +19,7 @@
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
         <microservice.dependencies.version>11.2.1</microservice.dependencies.version>
-        <postgresql.jdbc.version>42.7.7</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.8</postgresql.jdbc.version>
         <microservice.framework.version>7.2.1</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.40</version>
+            <version>1.18.42</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -358,7 +358,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.40</version>
+                            <version>1.18.42</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
