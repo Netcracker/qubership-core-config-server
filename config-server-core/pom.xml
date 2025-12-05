@@ -18,9 +18,9 @@
         <system-stubs.version>2.1.8</system-stubs.version>
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
-        <microservice.dependencies.version>11.2.2</microservice.dependencies.version>
+        <microservice.dependencies.version>11.2.5</microservice.dependencies.version>
         <postgresql.jdbc.version>42.7.8</postgresql.jdbc.version>
-        <microservice.framework.version>7.2.2</microservice.framework.version>
+        <microservice.framework.version>7.2.5</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
 
@@ -124,12 +124,12 @@
         <dependency>
             <groupId>com.netcracker.cloud</groupId>
             <artifactId>logger-manager-spring</artifactId>
-            <version>6.2.2</version>
+            <version>6.2.8</version>
         </dependency>
         <dependency>
             <groupId>com.netcracker.cloud</groupId>
             <artifactId>webclient</artifactId>
-            <version>6.2.2</version>
+            <version>6.2.8</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
