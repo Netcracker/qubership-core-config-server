@@ -3,12 +3,5 @@
   "assignAutomerge" : true,
   "assigneesFromCodeOwners" : true,
   "reviewersFromCodeOwners" : true,
-  "extends" : [ "github>Netcracker/qubership-core-infra:renovate-core-config" ],
-  "hostRules": [
-    {
-      "matchHost": "https://maven.pkg.github.com/netcracker",
-      "hostType": "maven",
-      "token": "{{ secrets.renovation_bot_private_packages_read }}"
-    }
-  ]
+  "extends" : [ "github>Netcracker/qubership-core-infra:renovate-core-config" ]
 }
