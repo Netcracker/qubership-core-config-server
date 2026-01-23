@@ -8,7 +8,7 @@
     {
       "matchHost": "https://maven.pkg.github.com/netcracker",
       "hostType": "maven",
-      "token": "{{ secrets.TMP_GH_PACKAGES_TOKEN }}"
+      "token": "{{ secrets.renovation_bot_private_packages_read }}"
     }
   ]
 }
