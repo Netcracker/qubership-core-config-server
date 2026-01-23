@@ -3,5 +3,15 @@
   "assignAutomerge" : true,
   "assigneesFromCodeOwners" : true,
   "reviewersFromCodeOwners" : true,
-  "extends" : [ "github>Netcracker/qubership-core-infra:renovate-core-config" ]
+  "extends" : [ "github>Netcracker/qubership-core-infra:renovate-core-config" ],
+  "hostRules": [
+    {
+      "matchHost": "https://maven.pkg.github.com/netcracker",
+      "hostType": "maven",
+      "userName": "taurmorchant",
+      "encrypted": {
+        "token": "wcBMA8xOaBJvzJNbAQf/Xg5M0/5v/bTBYkrgj6ZH1d8rzO6HCf9jA+7fJs4H/cuqXspHAYqDZ8tnTmXHLT5oH3tLB4P92G3ojxj4OJBPlawe6akVJl6XphC5NnbmzmS2xRDtC19yUc2hgC+n3mQPNkRdh5puege+7JH9eA42QZr+bkQQfhdEmPLZqaPbfwPy1GVM7nF7DvysNm7o7HJ0CTel/c8OsXifHlDiaNo28hcZrkRt3wdbYQyQF/RVAvJ1NE6OiggiRVRcQJX4xMYyuPY9yuzJHLyx9NmkSBNS+xZkWRjzxLiTACAzGNYuxAdG5H5zSxF3/v0kqOiF2LVctXcKxNJSs+4xS6qxQd6wi9KVAc2pzGBUi8GoHNVlKS7rT9uX9xh2+z4s14H2znAxnolOjjidSut1e+9USchP9AS20UJLIOvBA0l0Fiv67oUqDoEKlHAAzkaC2kraf6StMVzdTXXPW1fjo6RXutN2rjpgFkGt68JRjrYTFOH/XAfwZiE7J5XuZ2hyrX+rv8Fif0RNrfjeZOxPyz7+1W8DbabaiCyin2E"
+      }
+    }
+  ]
 }
