@@ -11,7 +11,7 @@
     <artifactId>config-server-core</artifactId>
  
     <properties>
-        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
         <encryption.cipher.version>12.2.1</encryption.cipher.version>
         <version.com.squareup.okhttp3-okhttp>4.12.0</version.com.squareup.okhttp3-okhttp>
         <!-- arquillian -->
@@ -19,7 +19,7 @@
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
         <microservice.dependencies.version>11.2.9</microservice.dependencies.version>
-        <postgresql.jdbc.version>42.7.8</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.9</postgresql.jdbc.version>
         <microservice.framework.version>7.2.9</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
