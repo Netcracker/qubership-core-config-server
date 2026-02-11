@@ -4,7 +4,7 @@
     <parent>
         <artifactId>config-server-aggregator</artifactId>
         <groupId>com.netcracker.cloud</groupId>
-        <version>3.3.0</version>
+        <version>3.3.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
