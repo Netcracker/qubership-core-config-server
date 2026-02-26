@@ -14,7 +14,7 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <microservice.dependencies.version>11.5.1-SNAPSHOT</microservice.dependencies.version>
+        <microservice.dependencies.version>11.3.0</microservice.dependencies.version>
     </properties>
 
     <dependencyManagement>
