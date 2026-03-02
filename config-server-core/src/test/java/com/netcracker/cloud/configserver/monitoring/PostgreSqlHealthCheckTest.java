@@ -9,7 +9,7 @@ import com.netcracker.cloud.configserver.config.ConfigProfile;
 import com.netcracker.cloud.configserver.config.ConfigProperty;
 import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
 import com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRepository;
-import org.springframework.boot.actuate.health.Status;
+import org.springframework.boot.health.contributor.Status;
 import org.springframework.dao.DataAccessResourceFailureException;
 
 import java.util.Collections;
