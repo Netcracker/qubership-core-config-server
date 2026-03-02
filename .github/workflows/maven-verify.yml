@@ -26,5 +26,6 @@ jobs:
     with:
       maven-command: 'verify'
       sonar-project-key: ${{ vars.SONAR_PROJECT_KEY }}
+      java-version: '25'
     secrets: inherit
 
