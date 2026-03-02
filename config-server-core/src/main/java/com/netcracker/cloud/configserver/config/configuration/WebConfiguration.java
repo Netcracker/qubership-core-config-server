@@ -2,21 +2,18 @@ package com.netcracker.cloud.configserver.config.configuration;
 
 import com.netcracker.cloud.restclient.MicroserviceRestClientFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.UrlHandlerFilter;
 
 @Configuration
 public class WebConfiguration {
 
     @Bean
-    public FilterRegistrationBean<UrlHandlerFilter> urlHandlerFilter() {
-        UrlHandlerFilter filter = UrlHandlerFilter.trailingSlashHandler("/**")
-                .redirect(HttpStatus.PERMANENT_REDIRECT)
+    public UrlHandlerFilter urlHandlerFilter() {
+        return UrlHandlerFilter.trailingSlashHandler("/**")
+                .wrapRequest()
                 .build();
-        return new FilterRegistrationBean<>(filter);
     }
 
     @Bean("simpleMicroserviceRestClientFactory")
