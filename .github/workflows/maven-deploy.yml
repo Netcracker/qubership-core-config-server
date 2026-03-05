@@ -35,6 +35,6 @@ jobs:
       maven-command: 'deploy'
       sonar-project-key: ${{ vars.SONAR_PROJECT_KEY }}
       ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}
-      java-version: '25'
+      java-version: '21'
     secrets: inherit
 
