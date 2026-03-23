@@ -20,7 +20,7 @@
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
         <microservice.dependencies.version>11.4.3</microservice.dependencies.version>
         <rest-libraries.version>6.4.1</rest-libraries.version>
-        <postgresql.jdbc.version>42.7.9</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.10</postgresql.jdbc.version>
         <microservice.framework.version>7.4.1</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
@@ -324,7 +324,7 @@
         <dependency>
             <groupId>io.github.hakky54</groupId>
             <artifactId>logcaptor</artifactId>
-            <version>2.12.2</version>
+            <version>2.12.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
