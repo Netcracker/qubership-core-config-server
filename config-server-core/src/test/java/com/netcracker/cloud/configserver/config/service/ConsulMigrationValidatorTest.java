@@ -4,11 +4,11 @@ import com.netcracker.cloud.configserver.config.ConfigProfile;
 import com.netcracker.cloud.configserver.config.ConfigProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 
 import static com.netcracker.cloud.configserver.config.service.ConsulMigrationValidator.VALUE_SIZE_ALARM;
+import static org.apache.commons.lang3.RandomStringUtils.insecure;
 
 class ConsulMigrationValidatorTest {
 
@@ -39,7 +39,7 @@ class ConsulMigrationValidatorTest {
     }
 
     private ConfigProperty createConfigPropertyWithBigValue(String key) {
-        String value = RandomStringUtils.randomAlphabetic(ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES * 2);
+        String value = insecure().nextAlphabetic(ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES * 2);
         return createConfigProperty(key, value);
     }
 }

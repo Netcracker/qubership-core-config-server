@@ -6,9 +6,9 @@ import com.netcracker.cloud.configserver.config.repository.DefaultEnvironmentRep
 import com.netcracker.cloud.configserver.config.service.ConsulMigrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.health.contributor.Health;
+import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
