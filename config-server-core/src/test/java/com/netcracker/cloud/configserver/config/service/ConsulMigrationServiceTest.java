@@ -1,5 +1,6 @@
 package com.netcracker.cloud.configserver.config.service;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,16 +8,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.netcracker.cloud.configserver.config.ConfigProfile;
 import com.netcracker.cloud.configserver.config.ConfigProperty;
 import com.netcracker.cloud.configserver.config.repository.ConfigPropertiesRepository;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static org.apache.commons.lang3.RandomStringUtils.insecure;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static com.netcracker.cloud.configserver.config.service.ConsulMigrationValidator.CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES;
@@ -28,10 +29,10 @@ class ConsulMigrationServiceTest {
 
     private ConsulMigrationService consulMigrationService;
 
-    @MockBean
+    @MockitoBean
     private JdbcTemplate jdbcTemplate;
 
-    @MockBean
+    @MockitoBean
     private ConfigPropertiesRepository pgRepository;
 
     private final ConsulService consulService = spy(new ConsulService(null, NAMESPACE));
@@ -89,7 +90,7 @@ class ConsulMigrationServiceTest {
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk0", "tv0", false));
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk1", "tv1", false));
 
-        String bigValue = RandomStringUtils.random(CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES * 2);
+        String bigValue = insecure().next(CONSUL_VALUE_SIZE_RESTRICTION_UPPER_LIMIT_BYTES * 2);
         properties.add(new ConfigProperty(UUID.randomUUID(), "tk2", bigValue, false));
 
         List<ConfigProfile> profiles = new ArrayList<>(1);

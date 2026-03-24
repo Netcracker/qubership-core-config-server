@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.10</version>
+        <version>4.0.2</version>
     </parent>
 
     <groupId>com.netcracker.cloud</groupId>
     <artifactId>config-server-aggregator</artifactId>
-    <version>3.3.4-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 
     <licenses>
         <license>
