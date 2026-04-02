@@ -18,10 +18,10 @@
         <system-stubs.version>2.1.8</system-stubs.version>
         <version.org.awaitility-awaitility>4.0.3</version.org.awaitility-awaitility>
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
-        <microservice.dependencies.version>12.0.0</microservice.dependencies.version>
-        <rest-libraries.version>7.0.2</rest-libraries.version>
+        <microservice.dependencies.version>12.0.1</microservice.dependencies.version>
+        <rest-libraries.version>7.0.3</rest-libraries.version>
         <postgresql.jdbc.version>42.7.10</postgresql.jdbc.version>
-        <microservice.framework.version>8.0.2</microservice.framework.version>
+        <microservice.framework.version>8.0.3</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
 
