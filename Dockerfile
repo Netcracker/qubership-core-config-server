@@ -1,4 +1,4 @@
-FROM ghcr.io/netcracker/qubership-java-base:21-alpine-2.2.6
+FROM ghcr.io/netcracker/qubership-java-base:21-alpine-2.2.7
 LABEL maintainer="qubership"
 
 COPY --chown=10001:0 config-server-app/target/config-server-app-*.jar /app/config-server.jar
