@@ -43,7 +43,7 @@ jobs:
             echo "**Dry-run**: ${{ github.event.inputs.dry-run || 'false' }}"
             echo "**Debug**: ${{ github.event.inputs.debug || 'false' }}"
         - name: Run Container Package Cleanup Action
-          uses: netcracker/qubership-workflow-hub/actions/container-package-cleanup@19e99ffd16f3c599e0a0a843cd0055c33cc708ff
+          uses: netcracker/qubership-workflow-hub/actions/container-package-cleanup@637d7ee3dc54c238336780ec2da9f4091eae2796
           with:
             threshold-days: ${{ github.event.inputs.threshold-days || 8 }}
             included-tags: ${{ github.event.inputs.included-tags || '*' }}
