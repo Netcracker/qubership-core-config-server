@@ -26,8 +26,8 @@ dbaas:
       minimumIdle: 3
 
 consul:
-  enabled: ${CONSUL_ENABLED:false}
-  url: ${CONSUL_URL:}
+  enabled: ${CONSUL_ENABLED:true}
+  url: ${CONSUL_URL:http://localhost:8500}
   token: ${CONSUL_TOKEN:}
 
 management:
