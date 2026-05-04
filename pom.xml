@@ -28,6 +28,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <surefire-plugin.version>3.5.5</surefire-plugin.version>
         <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
+        <spring-cloud-config-server.version>5.0.2</spring-cloud-config-server.version>
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.basedir}/../config-server-report-aggregate/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>

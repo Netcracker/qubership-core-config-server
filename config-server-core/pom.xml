@@ -42,13 +42,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-               <!-- Please remove this dependency
-                when org.springframework.cloud:spring-cloud-config-server
-                include the latest version of org.yaml:snakeyaml.
-                Current version of org.springframework.cloud:spring-cloud-config-server - 3.1.5 -->
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>2.5</version>
+                <!-- please remove this dependency
+                when org.springframework.cloud:spring-cloud-dependencies
+                include 5.0.2+ version of spring-cloud-config-dependencies.
+                Current version of spring-cloud-config-dependencies in spring-cloud-dependencies is 5.0.1-->
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud-config-server.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

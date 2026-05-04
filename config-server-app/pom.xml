@@ -33,6 +33,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <!-- please remove this dependency
+                when org.springframework.cloud:spring-cloud-dependencies
+                include 5.0.2+ version of spring-cloud-config-dependencies.
+                Current version of spring-cloud-config-dependencies in spring-cloud-dependencies is 5.0.1-->
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud-config-server.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
