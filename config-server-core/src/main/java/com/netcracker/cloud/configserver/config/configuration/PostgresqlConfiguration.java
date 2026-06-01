@@ -39,7 +39,6 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 @Configuration
-// vaultTemplate will be provided by SpringVaultClientConfiguration
 @EnableServiceDbaasPostgresql
 @EnableJpaRepositories("com.netcracker.cloud.configserver.config.repository")
 public class PostgresqlConfiguration {
