@@ -447,6 +447,13 @@
       "description": "Consul admin token",
       "internal": true
     },
+    "POD_SECRETS_ENABLED": {
+      "$id": "#/properties/POD_SECRETS_ENABLED",
+      "$ref": "#/definitions/booleanOrString",
+      "description": "Mount Kubernetes Secrets as pod-secrets volume instead of injecting them as env vars via secretKeyRef",
+      "internal": true,
+      "title": "The POD_SECRETS_ENABLED schema"
+    },
     "NC_DIAGNOSTIC_MODE": {
       "$id": "#/properties/NC_DIAGNOSTIC_MODE",
       "type": "string",

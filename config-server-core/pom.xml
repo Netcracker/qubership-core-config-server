@@ -20,6 +20,7 @@
         <jacoco.plugin.version>0.8.15</jacoco.plugin.version>
         <microservice.dependencies.version>12.1.1</microservice.dependencies.version>
         <rest-libraries.version>7.2.1</rest-libraries.version>
+        <pod-secrets-provider.version>7.3.0-SNAPSHOT</pod-secrets-provider.version>
         <postgresql.jdbc.version>42.7.11</postgresql.jdbc.version>
         <microservice.framework.version>8.1.1</microservice.framework.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
@@ -121,6 +122,11 @@
             <groupId>com.netcracker.cloud</groupId>
             <artifactId>webclient</artifactId>
             <version>${rest-libraries.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netcracker.cloud</groupId>
+            <artifactId>pod-secrets-provider-spring</artifactId>
+            <version>${pod-secrets-provider.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
