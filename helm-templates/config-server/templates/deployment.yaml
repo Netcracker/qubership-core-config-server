@@ -70,7 +70,6 @@ spec:
             -   name: java-certs
                 emptyDir: {}
 {{ end }}
-            {{- if .Values.POD_SECRETS_ENABLED }}
             -   name: pod-secrets
                 projected:
                     sources:
@@ -95,7 +94,6 @@ spec:
                             -   key: token
                                 path: CONSUL_TOKEN
                     {{- end }}
-            {{- end }}
             containers:
             -   name: '{{ .Values.SERVICE_NAME }}'
                 image: '{{ .Values.IMAGE_REPOSITORY }}:{{ .Values.TAG }}'
@@ -115,11 +113,9 @@ spec:
                 -   name: java-certs
                     mountPath: /etc/ssl/certs/java
 {{ end }}
-                {{- if .Values.POD_SECRETS_ENABLED }}
                 -   name: pod-secrets
                     mountPath: /etc/secrets/pod-secrets
                     readOnly: true
-                {{- end }}
                 args:
                 - /usr/bin/java
                 - '{{ .Values.MEM_ARGS }}'
@@ -161,22 +157,6 @@ spec:
                     value: '{{ .Values.ALLOWED_HEADERS }}'
                 -   name: API_DBAAS_ADDRESS
                     value: '{{ .Values.API_DBAAS_ADDRESS }}'
-                {{- if not .Values.POD_SECRETS_ENABLED }}
-                -   name: DBAAS_CREDENTIALS_USERNAME
-                    valueFrom:
-                        secretKeyRef:
-                            name: 'dbaas-config-server-credential-secret'
-                            key: username
-                -   name: DBAAS_CREDENTIALS_PASSWORD
-                    valueFrom:
-                        secretKeyRef:
-                            name: 'dbaas-config-server-credential-secret'
-                            key: password
-                -   name: EMAIL_USER
-                    value: '{{ .Values.EMAIL_USER }}'
-                -   name: EMAIL_PASSWORD
-                    value: '{{ .Values.EMAIL_PASSWORD }}'
-                {{- end }}
                 -   name: CLOUD_PUBLIC_HOST
                     value: '{{ .Values.CLOUD_PUBLIC_HOST }}'
                 -   name: CLOUD_PRIVATE_HOST
@@ -208,13 +188,6 @@ spec:
                 {{- if .Values.CONSUL_ENABLED }}
                 -   name: CONSUL_URL
                     value: '{{ .Values.CONSUL_URL }}'
-                {{- if not .Values.POD_SECRETS_ENABLED }}
-                -   name: CONSUL_TOKEN
-                    valueFrom:
-                        secretKeyRef:
-                            name: config-server-consul-token
-                            key: token
-                {{- end }}
                 {{- end }}
                 -   name: HTTP_BUFFER_HEADER_MAX_SIZE
                     value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
