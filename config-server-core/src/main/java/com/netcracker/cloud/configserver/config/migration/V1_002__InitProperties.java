@@ -221,8 +221,8 @@ public class V1_002__InitProperties extends BaseJavaMigration {
 
         List<ConfigProperty> propertiesToAdd = new ArrayList<>(7);
 
-        String emailUser = System.getenv("EMAIL_USER");
-        String emailPassword = System.getenv("EMAIL_PASSWORD");
+        String emailUser = SpringUtility.getContext().getEnvironment().getProperty("EMAIL_USER");
+        String emailPassword = SpringUtility.getContext().getEnvironment().getProperty("EMAIL_PASSWORD");
         boolean emailAuth = true;
         if (StringUtils.isBlank(emailUser)) {
             emailAuth = false;
