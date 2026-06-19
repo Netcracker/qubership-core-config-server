@@ -70,6 +70,30 @@ spec:
             -   name: java-certs
                 emptyDir: {}
 {{ end }}
+            -   name: pod-secrets
+                projected:
+                    sources:
+                    -   secret:
+                            name: dbaas-config-server-credential-secret
+                            items:
+                            -   key: username
+                                path: DBAAS_CREDENTIALS_USERNAME
+                            -   key: password
+                                path: DBAAS_CREDENTIALS_PASSWORD
+                    -   secret:
+                            name: config-server-email-secret
+                            items:
+                            -   key: username
+                                path: EMAIL_USER
+                            -   key: password
+                                path: EMAIL_PASSWORD
+                    {{- if .Values.CONSUL_ENABLED }}
+                    -   secret:
+                            name: config-server-consul-token
+                            items:
+                            -   key: token
+                                path: CONSUL_TOKEN
+                    {{- end }}
             containers:
             -   name: '{{ .Values.SERVICE_NAME }}'
                 image: '{{ .Values.IMAGE_REPOSITORY }}:{{ .Values.TAG }}'
@@ -89,6 +113,9 @@ spec:
                 -   name: java-certs
                     mountPath: /etc/ssl/certs/java
 {{ end }}
+                -   name: pod-secrets
+                    mountPath: /etc/secrets/pod-secrets
+                    readOnly: true
                 args:
                 - /usr/bin/java
                 - '{{ .Values.MEM_ARGS }}'
@@ -130,26 +157,12 @@ spec:
                     value: '{{ .Values.ALLOWED_HEADERS }}'
                 -   name: API_DBAAS_ADDRESS
                     value: '{{ .Values.API_DBAAS_ADDRESS }}'
-                -   name: DBAAS_CREDENTIALS_USERNAME
-                    valueFrom:
-                        secretKeyRef:
-                            name: 'dbaas-config-server-credential-secret'
-                            key: username
-                -   name: DBAAS_CREDENTIALS_PASSWORD
-                    valueFrom:
-                        secretKeyRef:
-                            name: 'dbaas-config-server-credential-secret'
-                            key: password
                 -   name: CLOUD_PUBLIC_HOST
                     value: '{{ .Values.CLOUD_PUBLIC_HOST }}'
                 -   name: CLOUD_PRIVATE_HOST
                     value: '{{ .Values.CLOUD_PRIVATE_HOST }}'
                 -   name: EMAIL_HOST
                     value: '{{ .Values.EMAIL_HOST }}'
-                -   name: EMAIL_USER
-                    value: '{{ .Values.EMAIL_USER }}'
-                -   name: EMAIL_PASSWORD
-                    value: '{{ .Values.EMAIL_PASSWORD }}'
                 -   name: EMAIL_FROM
                     value: '{{ .Values.EMAIL_FROM }}'
                 -   name: CLOUD_ADMIN_EMAIL
@@ -172,15 +185,10 @@ spec:
                     value: '{{ .Values.BASELINE_PROJ }}'
                 -   name: CONSUL_ENABLED
                     value: '{{ .Values.CONSUL_ENABLED | default false }}'
-                {{ if .Values.CONSUL_ENABLED }}
-                - name: CONSUL_URL
-                  value: '{{ .Values.CONSUL_URL }}'
-                - name: CONSUL_TOKEN
-                  valueFrom:
-                    secretKeyRef:
-                      name: config-server-consul-token
-                      key: token
-                {{ end }}
+                {{- if .Values.CONSUL_ENABLED }}
+                -   name: CONSUL_URL
+                    value: '{{ .Values.CONSUL_URL }}'
+                {{- end }}
                 -   name: HTTP_BUFFER_HEADER_MAX_SIZE
                     value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
                 resources:
