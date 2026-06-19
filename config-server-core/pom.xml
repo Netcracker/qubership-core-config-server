@@ -15,20 +15,12 @@
         <version.com.squareup.okhttp3-okhttp>4.12.0</version.com.squareup.okhttp3-okhttp>
         <!-- arquillian -->
         <system-stubs.version>2.1.8</system-stubs.version>
-        <core-spring-external-bom.version>1.0.0-SNAPSHOT</core-spring-external-bom.version>
         <postgresql.jdbc.version>42.7.11</postgresql.jdbc.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.netcracker.cloud</groupId>
-                <artifactId>core-spring-external-bom</artifactId>
-                <version>${core-spring-external-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
