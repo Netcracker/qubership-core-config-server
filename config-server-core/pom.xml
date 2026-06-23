@@ -16,7 +16,7 @@
         <!-- arquillian -->
         <system-stubs.version>2.1.8</system-stubs.version>
         <postgresql.jdbc.version>42.7.11</postgresql.jdbc.version>
-        <org.mock-server.version>5.15.0</org.mock-server.version>
+        <org.mock-server.version>7.2.0</org.mock-server.version>
     </properties>
 
     <dependencyManagement>
