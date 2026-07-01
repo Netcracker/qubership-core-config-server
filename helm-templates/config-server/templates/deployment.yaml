@@ -216,6 +216,8 @@ spec:
                 {{- end }}
                 -   name: HTTP_BUFFER_HEADER_MAX_SIZE
                     value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
+                -   name: KUBERNETES_M2M_ENABLED
+                    value: '{{ .Values.KUBERNETES_M2M_ENABLED }}'
                 resources:
                     requests:
                         cpu: '{{ .Values.CPU_REQUEST }}'
