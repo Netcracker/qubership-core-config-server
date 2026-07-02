@@ -681,6 +681,14 @@
       ],
       "internal": true,
       "title": "The HPA_SCALING_UP_STABILIZATION_WINDOW_SECONDS scheme"
+    },
+    "KUBERNETES_M2M_ENABLED": {
+      "$id": "#/properties/KUBERNETES_M2M_ENABLED",
+      "type": "boolean",
+      "title": "The KUBERNETES_M2M_ENABLED schema",
+      "description": "Shows that kubernetes m2m communication is enabled.",
+      "internal": true,
+      "default": false
     }
   },
   "additionalProperties": true
