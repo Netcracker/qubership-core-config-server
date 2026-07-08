@@ -6,6 +6,5 @@ COPY --chown=10001:0 config-server-app/target/config-server-app-*.jar /app/confi
 EXPOSE 8080
 
 WORKDIR /app
-USER 10001:10001
 
 CMD ["/usr/bin/java", "-Xmx512m", "-jar", "/app/config-server.jar"]
