@@ -34,6 +34,20 @@ class EnvironmentControllerConfigurationTest {
                 .containsExactly("default, test");
     }
 
+    @Test
+    void postProcessor_disablesValidationOnStockController() {
+        EnvironmentController stock = new EnvironmentController(
+                (application, profile, label) -> new Environment(application, "default"),
+                new JsonMapper());
+        // default validateProfiles is true
+        Object processed = EnvironmentControllerConfiguration.environmentControllerValidationPostProcessor()
+                .postProcessBeforeInitialization(stock, "environmentController");
+
+        assertThat(processed).isSameAs(stock);
+        // After BPP, spaced profiles must not be rejected by parent validation
+        assertThat(stock.getEnvironment("app", "default, test", null, false).getName()).isEqualTo("app");
+    }
+
     private static <T> ObjectProvider<T> provider(T value) {
         return new ObjectProvider<>() {
             @Override

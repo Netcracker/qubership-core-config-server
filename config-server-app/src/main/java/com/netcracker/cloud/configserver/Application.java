@@ -1,12 +1,15 @@
 package com.netcracker.cloud.configserver;
 
+import com.netcracker.cloud.configserver.config.configuration.EnvironmentControllerConfiguration;
 import com.netcracker.cloud.log.manager.spring.LoggingFilter;
 import com.netcracker.cloud.microserviceframework.BaseApplicationOnRestTemplate;
 import com.netcracker.cloud.microserviceframework.application.MicroserviceApplicationBuilder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.context.annotation.Import;
 
 @EnableConfigServer
+@Import(EnvironmentControllerConfiguration.class)
 @SpringBootApplication(excludeName = {
         "org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory",
         "org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration",
