@@ -68,6 +68,11 @@ public class DefaultEnvironmentRepository implements EnvironmentRepository {
 
         log.debug("Merged properties: {}, version: {}", mergedProperties.keySet(), environmentVersion);
         Environment environment = new Environment(application, activeProfiles, label, String.valueOf(environmentVersion.get()), null);
+        // Legacy contract (pre config-server 5.0.3 / ITs): when the request profile path contains
+        // spaces (e.g. "default, test"), echo it as a single profiles entry instead of the split array.
+        if (activeProfile != null && activeProfile.contains(" ")) {
+            environment.setProfiles(new String[]{activeProfile});
+        }
         environment.add(new PropertySource(configProfileProvider.getPropertiesSource(), mergedProperties));
         return environment;
     }
