@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.UrlHandlerFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfiguration {
+public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
     public UrlHandlerFilter urlHandlerFilter() {
@@ -22,5 +24,10 @@ public class WebConfiguration {
             @Value("${rest-client.pool.pending-acquire-timeout-sec:30}") int pendingAcquireTimeout,
             @Value("${rest-client.pool.evict-in-background-sec:120}") int evictInBackground) {
         return new MicroserviceWebClientFactory(maxIdleTime, pendingAcquireTimeout, evictInBackground);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ProfileNormalizationInterceptor());
     }
 }
