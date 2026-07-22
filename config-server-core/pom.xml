@@ -15,7 +15,7 @@
         <version.com.squareup.okhttp3-okhttp>4.12.0</version.com.squareup.okhttp3-okhttp>
         <!-- arquillian -->
         <system-stubs.version>2.1.8</system-stubs.version>
-        <postgresql.jdbc.version>42.7.11</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.12</postgresql.jdbc.version>
         <org.mock-server.version>5.15.0</org.mock-server.version>
     </properties>
 
