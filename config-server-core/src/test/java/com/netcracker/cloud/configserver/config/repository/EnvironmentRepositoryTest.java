@@ -65,6 +65,23 @@ class EnvironmentRepositoryTest {
     }
 
     @Test
+    void findOne_spacedProfileList_echoesRawProfilePath_andKeepsDefaultValue() {
+        // Mirrors BaseApiIT.testMultipleProfiles: GET .../default,%20test
+        utils.createTestProfileInDB(application, "default",
+                Collections.singletonMap(propertyKey, new ConfigProperty(propertyKey, "value.default", false)), 1);
+        utils.createTestProfileInDB(application, "test",
+                Collections.singletonMap(propertyKey, new ConfigProperty(propertyKey, "value.test", false)), 1);
+        utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,
+                CONFIG_PROPERTIES_DEFAULT_PROFILE_NAME, globalProperties, 1);
+
+        Environment env = environmentRepository.findOne(application, "default, test", null);
+
+        assertThat(env.getProfiles(), is(equalTo(new String[]{"default, test"})));
+        PropertySource ps = env.getPropertySources().getFirst();
+        assertThat(ps.getSource().get(propertyKey), is(equalTo("value.default")));
+    }
+
+    @Test
     void findOne_ProfilePropertyNotExist_Test() {
         utils.createTestProfileInDB(application, profile, Collections.emptyMap(), 1);
         utils.createTestProfileInDB(CONFIG_PROPERTIES_GLOBAL_APPLICATION_NAME,

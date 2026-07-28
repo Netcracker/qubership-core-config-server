@@ -10,7 +10,7 @@
 
     <groupId>com.netcracker.cloud</groupId>
     <artifactId>config-server-aggregator</artifactId>
-    <version>4.1.4-SNAPSHOT</version>
+    <version>4.1.4-fix-SNAPSHOT</version>
 
     <licenses>
         <license>
