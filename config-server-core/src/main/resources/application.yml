@@ -34,12 +34,20 @@ management:
   tracing:
     enabled: ${TRACING_ENABLED:false}
     sampling:
-      probability : ${TRACING_SAMPLER_PROBABILISTIC:1.0}
+      probability: ${TRACING_SAMPLER_PROBABILISTIC:0.01}
+  # Zipkin disabled — migrated to OpenTelemetry OTLP (CPCAP-10141)
   zipkin:
     tracing:
-      endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:9411/api/v2/spans
-    service.name: config-server-${spring.application.cloud_namespace}
-    sender.type: web
+      export:
+        enabled: false
+  otlp:
+    tracing:
+      endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:4317
+      transport: grpc
+  # Jaeger display name (keep spring.application.name without namespace for DBaaS identity)
+  opentelemetry:
+    resource-attributes:
+      service.name: ${MICROSERVICE_NAME:config-server}-${CLOUD_NAMESPACE:unknown}
   info.defaults.enabled: true
   endpoints:
     web:
