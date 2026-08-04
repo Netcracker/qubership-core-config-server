@@ -40,14 +40,15 @@ management:
     tracing:
       export:
         enabled: false
-  otlp:
-    tracing:
-      endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:4317
-      transport: grpc
   # Jaeger display name (keep spring.application.name without namespace for DBaaS identity)
   opentelemetry:
     resource-attributes:
       service.name: ${MICROSERVICE_NAME:config-server}-${CLOUD_NAMESPACE:unknown}
+    tracing:
+      export:
+        otlp:
+          endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:4317
+          transport: grpc
   info.defaults.enabled: true
   endpoints:
     web:
