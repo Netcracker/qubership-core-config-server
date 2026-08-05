@@ -32,12 +32,20 @@ consul:
 
 management:
   tracing:
-    enabled: ${TRACING_ENABLED:false}
+    # Boot 4 removed management.tracing.enabled
+    export:
+      enabled: ${TRACING_ENABLED:false}
     sampling:
       probability: ${TRACING_SAMPLER_PROBABILISTIC:0.01}
   # Zipkin disabled — migrated to OpenTelemetry OTLP (CPCAP-10141)
   zipkin:
     tracing:
+      export:
+        enabled: false
+  # spring-boot-starter-opentelemetry brings micrometer-registry-otlp, which would push
+  # metrics to localhost:4318; metrics are collected via /prometheus instead
+  otlp:
+    metrics:
       export:
         enabled: false
   # Jaeger display name (keep spring.application.name without namespace for DBaaS identity)

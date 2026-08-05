@@ -10,7 +10,7 @@
 
     <groupId>com.netcracker.cloud</groupId>
     <artifactId>config-server-aggregator</artifactId>
-    <version>4.2.0-tracing-fix-SNAPSHOT</version>
+    <version>4.2.0-tracing-SNAPSHOT</version>
 
     <licenses>
         <license>
