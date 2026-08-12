@@ -37,7 +37,7 @@ management:
       enabled: ${TRACING_ENABLED:false}
     sampling:
       probability: ${TRACING_SAMPLER_PROBABILISTIC:0.01}
-  # Zipkin disabled — migrated to OpenTelemetry OTLP (CPCAP-10141)
+  # Zipkin disabled — migrated to OpenTelemetry OTLP
   zipkin:
     tracing:
       export:

@@ -72,7 +72,7 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-observation</artifactId>
         </dependency>
-        <!-- OpenTelemetry OTLP tracing (CPCAP-10141) — Boot 4 starter brings bridge + exporter + autoconfig -->
+        <!-- OpenTelemetry OTLP tracing  — Boot 4 starter brings bridge + exporter + autoconfig -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-opentelemetry</artifactId>
