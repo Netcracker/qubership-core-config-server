@@ -32,9 +32,13 @@ consul:
 
 management:
   tracing:
-    # Boot 4 removed management.tracing.enabled
     export:
       enabled: ${TRACING_ENABLED:false}
+      otlp:
+        enabled: true
+    propagation:
+      produce: [B3_MULTI]
+      consume: [B3_MULTI, W3C]
     sampling:
       probability: ${TRACING_SAMPLER_PROBABILISTIC:0.01}
   # Zipkin disabled — migrated to OpenTelemetry OTLP
@@ -55,8 +59,7 @@ management:
     tracing:
       export:
         otlp:
-          endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:4317
-          transport: grpc
+          endpoint: http://${TRACING_HOST:nc-diagnostic-agent}:4318/v1/traces
   info.defaults.enabled: true
   endpoints:
     web:
