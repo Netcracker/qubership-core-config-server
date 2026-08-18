@@ -166,10 +166,6 @@ spec:
                     valueFrom:
                       fieldRef:
                         fieldPath: metadata.namespace
-                -   name: XNIO_IO_THREAD
-                    value: '{{ .Values.XNIO_IO_THREAD }}'
-                -   name: XNIO_WORK_THREAD
-                    value: '{{ .Values.XNIO_WORK_THREAD }}'
                 -   name: TRACING_ENABLED
                     value: '{{ .Values.TRACING_ENABLED }}'
                 -   name: TRACING_HOST
