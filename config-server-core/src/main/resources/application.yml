@@ -1,11 +1,6 @@
 server:
   port: 8080
   max-http-request-header-size: ${HTTP_BUFFER_HEADER_MAX_SIZE:10240}
-  undertow:
-    # number of I/O threads to create for the worker
-    io-threads: ${XNIO_IO_THREAD:14}
-    # number of worker threads = io * 8
-    worker-threads: ${XNIO_WORK_THREAD:112}
 # TODO config database name should be with respect to multitenancy
 
 config-server:
@@ -85,7 +80,7 @@ spring:
     server_hostname: ${CLOUD_PUBLIC_HOST:unknown}
   autoconfigure:
     exclude:
-      - org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
+      - org.springframework.boot.jdbc.autoconfigure.metrics.DataSourcePoolMetricsAutoConfiguration
   main:
     allow-bean-definition-overriding: true
     lazy-initialization: true

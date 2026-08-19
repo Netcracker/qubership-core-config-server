@@ -9,7 +9,7 @@ import org.springframework.integration.jdbc.lock.JdbcLockRegistry;
 import org.springframework.integration.jdbc.lock.LockRepository;
 
 import javax.sql.DataSource;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 
 @Configuration
@@ -20,13 +20,11 @@ public class LockConfiguration {
 
     @Bean
     public DefaultLockRepository DefaultLockRepository(DataSource dataSource) {
-        DefaultLockRepository rep = new DefaultLockRepository(dataSource);
-        rep.setTimeToLive((int) TimeUnit.SECONDS.toMillis(ttlSec)); // time to live of a lock record in DB
-        return rep;
+        return new DefaultLockRepository(dataSource);
     }
 
     @Bean
     public JdbcLockRegistry jdbcLockRegistry(LockRepository lockRepository) {
-        return new JdbcLockRegistry(lockRepository);
+        return new JdbcLockRegistry(lockRepository, Duration.ofSeconds(ttlSec)); // time to live of a lock record in DB
     }
 }

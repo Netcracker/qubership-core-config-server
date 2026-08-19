@@ -34,8 +34,6 @@
       "PUBLIC_GATEWAY_URL": "",
       "REPLICAS": 1,
       "TAG": "",
-      "XNIO_IO_THREAD": 14,
-      "XNIO_WORK_THREAD": 112,
       "TRACING_ENABLED": false,
       "TRACING_HOST": "nc-diagnostic-agent",
       "TRACING_SAMPLER_PROBABILISTIC": 1.0,
@@ -325,22 +323,6 @@
       "type": "string",
       "title": "The TAG schema",
       "internal": true
-    },
-    "XNIO_IO_THREAD": {
-      "$id": "#/properties/XNIO_IO_THREAD",
-      "$ref": "#/definitions/integerOrString",
-      "description": "Number of IO threads in Undertow server.",
-      "envSpecific": true,
-      "internal": true,
-      "title": "The XNIO_IO_THREAD schema"
-    },
-    "XNIO_WORK_THREAD": {
-      "$id": "#/properties/XNIO_WORK_THREAD",
-      "$ref": "#/definitions/integerOrString",
-      "description": "umber of working threads in Undertow server.",
-      "envSpecific": true,
-      "internal": true,
-      "title": "The XNIO_WORK_THREAD schema"
     },
     "TRACING_ENABLED": {
       "$id": "#/properties/TRACING_ENABLED",
