@@ -34,18 +34,11 @@ management:
   tracing:
     export:
       enabled: ${TRACING_ENABLED:false}
-      otlp:
-        enabled: true
     propagation:
       produce: [B3_MULTI]
       consume: [B3_MULTI, W3C]
     sampling:
       probability: ${TRACING_SAMPLER_PROBABILISTIC:0.01}
-  # Zipkin disabled — migrated to OpenTelemetry OTLP
-  zipkin:
-    tracing:
-      export:
-        enabled: false
   # spring-boot-starter-opentelemetry brings micrometer-registry-otlp, which would push
   # metrics to localhost:4318; metrics are collected via /prometheus instead
   otlp:
