@@ -210,6 +210,14 @@ spec:
                 -   name: CONSUL_URL
                     value: '{{ .Values.CONSUL_URL }}'
                 {{- end }}
+                -   name: CONSUL_AUTH_MODE
+                    value: '{{ .Values.CONSUL_AUTH_MODE | default "" }}'
+                -   name: CONSUL_AUTH_METHOD
+                    value: '{{ .Values.CONSUL_AUTH_METHOD | default "" }}'
+                -   name: CONSUL_AUTH_AUDIENCE
+                    value: '{{ .Values.CONSUL_AUTH_AUDIENCE | default "" }}'
+                -   name: CONSUL_AUTH_FALLBACK_RECHECK_INTERVAL
+                    value: '{{ .Values.CONSUL_AUTH_FALLBACK_RECHECK_INTERVAL | default "" }}'
                 -   name: HTTP_BUFFER_HEADER_MAX_SIZE
                     value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
                 -   name: KUBERNETES_M2M_ENABLED
