@@ -89,6 +89,9 @@ spec:
             -   name: java-certs
                 emptyDir: {}
 {{ end }}
+            -   name: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-secret'
+                secret:
+                    secretName: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials'
             -   name: pod-secrets
                 projected:
                     sources:
@@ -132,6 +135,9 @@ spec:
                 -   name: java-certs
                     mountPath: /etc/ssl/certs/java
 {{ end }}
+                -   name: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-secret'
+                    mountPath: /etc/secrets/dbaas-secrets/{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials
+                    readOnly: true
                 -   name: pod-secrets
                     mountPath: /etc/secrets/pod-secrets
                     readOnly: true
