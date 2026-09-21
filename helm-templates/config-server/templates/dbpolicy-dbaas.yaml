@@ -1,3 +1,36 @@
+{{- /*
+Database role policy for this service.
+
+When the cluster serves dbaas.netcracker.com/v1 the policy is expressed as a native
+DatabaseAccessPolicy. Otherwise the legacy Core Operator declaration is kept, so the
+chart still installs — and the policy still applies — where the DBaaS Operator is
+not present.
+
+spec.policy carries the role resolution for this service's own requests: the
+DatabaseSecretClaim asks with an empty userRole, which the aggregator resolves
+through defaultRole. The legacy declaration expressed no grants, but the CRD
+requires at least one of services or policy.
+*/ -}}
+{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
+apiVersion: dbaas.netcracker.com/v1
+kind: DatabaseAccessPolicy
+metadata:
+  name: '{{ .Values.SERVICE_NAME }}-database-access-policy'
+  namespace: {{ .Values.NAMESPACE }}
+  labels:
+    app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
+    app.kubernetes.io/part-of: '{{ .Values.APPLICATION_NAME }}'
+    app.kubernetes.io/managed-by: 'saasDeployer'
+    deployment.netcracker.com/sessionId: '{{ .Values.DEPLOYMENT_SESSION_ID }}'
+spec:
+  operatorNamespace: {{ (index (splitList "." (first (splitList ":" (last (splitList "://" $.Values.API_DBAAS_ADDRESS))))) 1) | quote }}
+  microserviceName: '{{ .Values.SERVICE_NAME }}'
+  disableGlobalPermissions: true
+  policy:
+    - type: postgresql
+      defaultRole: admin
+      additionalRole: []
+{{- else }}
 apiVersion: core.netcracker.com/v1
 kind: DBaaS
 subKind: DbPolicy
@@ -12,3 +45,4 @@ metadata:
     deployment.netcracker.com/sessionId: "{{ .Values.DEPLOYMENT_SESSION_ID }}"
 spec:
   disableGlobalPermissions: true
+{{- end }}
