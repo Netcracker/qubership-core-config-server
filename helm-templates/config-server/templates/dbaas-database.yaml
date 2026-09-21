@@ -5,7 +5,12 @@ The identity below mirrors the request that dbaas-client builds at runtime for t
 @EnableServiceDbaasPostgresql datasource: classifier
 {microserviceName, namespace, scope=service} and type postgresql, requested with an
 empty user role. The REST provisioning path stays in place as a fallback.
+
+Both resources are rendered only when the cluster serves dbaas.netcracker.com/v1.
+Without the DBaaS Operator CRDs the chart must still install, so the service falls
+back to runtime REST provisioning and no unservable CR is submitted.
 */ -}}
+{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
 ---
 apiVersion: dbaas.netcracker.com/v1
 kind: InternalDatabase
@@ -45,3 +50,4 @@ spec:
     type: postgresql
     userRole: ""
     secretName: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials'
+{{- end }}
