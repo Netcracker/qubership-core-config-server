@@ -93,6 +93,10 @@ spec:
             -   name: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-secret'
                 secret:
                     secretName: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials'
+                    # Provisioning is asynchronous, so the Secret may not exist when the pod is
+                    # first scheduled. Without this the kubelet holds the pod in ContainerCreating
+                    # with FailedMount; with it the volume starts empty and is populated in place.
+                    optional: true
 {{- end }}
             -   name: pod-secrets
                 projected:
