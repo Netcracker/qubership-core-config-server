@@ -10,7 +10,7 @@ Rendered only when the cluster serves dbaas.netcracker.com/v1. Without the DBaaS
 Operator CRDs the chart must still install, so the service falls back to runtime REST
 provisioning and no unservable CR is submitted.
 */ -}}
-{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
+{{- if include "coretpl.dbaasOperatorEnabled" $ }}
 ---
 apiVersion: dbaas.netcracker.com/v1
 kind: InternalDatabase

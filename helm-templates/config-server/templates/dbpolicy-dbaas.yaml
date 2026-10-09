@@ -9,7 +9,7 @@ not present.
 The spec mirrors the legacy declaration: disableGlobalPermissions alone, with no
 grants. The CRD accepts that shape since Netcracker/qubership-dbaas#767.
 */ -}}
-{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
+{{- if include "coretpl.dbaasOperatorEnabled" $ }}
 apiVersion: dbaas.netcracker.com/v1
 kind: DatabaseAccessPolicy
 metadata:

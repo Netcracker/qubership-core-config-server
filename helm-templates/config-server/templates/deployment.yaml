@@ -89,7 +89,7 @@ spec:
             -   name: java-certs
                 emptyDir: {}
 {{ end }}
-{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
+{{- if include "coretpl.dbaasOperatorEnabled" $ }}
             -   name: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-secret'
                 secret:
                     secretName: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials'
@@ -137,7 +137,7 @@ spec:
                 -   name: java-certs
                     mountPath: /etc/ssl/certs/java
 {{ end }}
-{{- if .Capabilities.APIVersions.Has "dbaas.netcracker.com/v1" }}
+{{- if include "coretpl.dbaasOperatorEnabled" $ }}
                 -   name: '{{ .Values.SERVICE_NAME }}-postgresql-service-default-secret'
                     mountPath: /etc/secrets/dbaas-secrets/{{ .Values.SERVICE_NAME }}-postgresql-service-default-credentials
                     readOnly: true
