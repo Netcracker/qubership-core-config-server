@@ -220,8 +220,8 @@ spec:
                     value: '{{ .Values.CONSUL_AUTH_FALLBACK_RECHECK_INTERVAL }}'
                 -   name: HTTP_BUFFER_HEADER_MAX_SIZE
                     value: '{{ .Values.HTTP_BUFFER_HEADER_MAX_SIZE }}'
-                -   name: KUBERNETES_M2M_ENABLED
-                    value: '{{ .Values.KUBERNETES_M2M_ENABLED }}'
+                -   name: M2M_AUTH_MODE
+                    value: '{{ .Values.M2M_AUTH_MODE }}'
                 resources:
                     requests:
                         cpu: '{{ .Values.CPU_REQUEST }}'
