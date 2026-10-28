@@ -15,7 +15,7 @@
         <version.com.squareup.okhttp3-okhttp>4.12.0</version.com.squareup.okhttp3-okhttp>
         <!-- arquillian -->
         <system-stubs.version>2.1.8</system-stubs.version>
-        <postgresql.jdbc.version>42.7.13</postgresql.jdbc.version>
+        <postgresql.jdbc.version>42.7.14</postgresql.jdbc.version>
         <org.mock-server.version>8.0.0</org.mock-server.version>
     </properties>
 
@@ -24,7 +24,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2025.1.3</version>
+                <version>2025.1.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -113,7 +113,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.46</version>
+            <version>1.18.48</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -331,7 +331,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.46</version>
+                            <version>1.18.48</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
