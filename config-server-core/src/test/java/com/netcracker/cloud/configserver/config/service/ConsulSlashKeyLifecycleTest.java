@@ -20,6 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Contract for keys containing '/': one API key name maps to exactly one Consul path
  * for write, read, update and delete, and entries written by previous versions
  * ({@code &sol;} encoding) are found, updated (migrated) and deleted by their original name.
+ *
+ * These tests call {@link ConsulService} directly. An HTTP PUT goes through
+ * {@code ConfigPropertiesController}, which rewrites the whole profile, so any
+ * property save migrates every slash key in that profile. See
+ * {@link ConsulSlashKeyMigrationApiTest}.
  */
 class ConsulSlashKeyLifecycleTest {
 
@@ -128,12 +133,13 @@ class ConsulSlashKeyLifecycleTest {
     }
 
     @Test
-    void savingOtherPropertiesDoesNotDuplicateALegacyEntry() {
+    void savingOnlyOtherPropertiesOnTheServiceLeavesTheLegacyEntryInPlace() {
         String app = newApp();
         putLegacy(app, LEGACY_PATH, "DEBUG");
 
+        // ConsulService writes just the given properties. It does not load the profile,
+        // so an unrelated key is not a second copy and the legacy path stays until that key is saved.
         service.addConfigProfile(profile(app, prop("foo", "bar")));
-        // the API still lists the untouched legacy entry exactly once, under its original name
         assertEquals(Map.of(FQCN_KEY, "DEBUG", "foo", "bar"), read(app));
         assertEquals(Map.of(LEGACY_PATH, "DEBUG", "foo", "bar"), stored(app));
     }

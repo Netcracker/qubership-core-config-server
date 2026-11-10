@@ -29,9 +29,14 @@ public class ConfigPropertiesValidator {
     }
 
     private void validateConflictProperties(Map<String, ConfigProperty> source, ValidationResult validationResult) {
+        // encode each key once: the comparison below is O(n^2)
+        Map<String, String> paths = new HashMap<>();
+        for (String key : source.keySet()) {
+            paths.put(key, ConsulService.toConsulRelativeKey(key));
+        }
         for (String key : source.keySet()) {
             for (String anotherKey : source.keySet()) {
-                if (keysConflict(key, anotherKey)) {
+                if (pathsConflict(paths.get(key), paths.get(anotherKey))) {
                     if (!validationResult.getConflictingProperties().contains(String.format(CONFLICT_WITH, anotherKey, key))) {
                         validationResult.getConflictingProperties().add(String.format(CONFLICT_WITH, key, anotherKey));
                     }
@@ -40,10 +45,8 @@ public class ConfigPropertiesValidator {
         }
     }
 
-    private boolean keysConflict(String key1, String key2) {
-        // Keys conflict when one is a Consul "folder" of the other, so compare the stored paths.
-        String path1 = ConsulService.toConsulRelativeKey(key1);
-        String path2 = ConsulService.toConsulRelativeKey(key2);
+    /** Keys conflict when one is a Consul "folder" of the other, so the stored paths are compared. */
+    private boolean pathsConflict(String path1, String path2) {
         if (path1.length() == path2.length()) return false;
         String longerPath, shorterPath;
         if (path1.length() > path2.length()) {
