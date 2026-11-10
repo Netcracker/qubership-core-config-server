@@ -55,9 +55,11 @@ public class ConsulService {
         int batch = 0;
         int currentBatchSize = 0;
 
+        final String keyPrefix = formatKeyPrefix(configProfile);
         for (ConfigProperty property : configProfile.getProperties()) {
             log.debug("Perform escape operations for {}: {}", property.getKey(), valueForLogger(property));
-            String key = formatKeyPrefix(configProfile) + toConsulRelativeKey(property.getKey());
+            String relativeKey = toConsulRelativeKey(property.getKey());
+            String key = keyPrefix + relativeKey;
             String value = property.getValue() == null ? "" : property.getValue();
             Operation newOperation = ImmutableOperation.builder()
                     .verb(SET.toValue())
@@ -77,6 +79,18 @@ public class ConsulService {
             currentBatchSize += newOperationSize;
             batch++;
             log.debug("Property {}: {} added to Consul successfully", key, valueForLogger(property));
+
+            String legacyKey = keyPrefix + legacyToConsulRelativeKey(property.getKey());
+            if (!legacyKey.equals(key)) {
+                if (batch == CONSULT_TX_OPERATION_LIMIT) {
+                    performTransaction(operation);
+                    operation = new ArrayList<>();
+                    batch = 0;
+                    currentBatchSize = 0;
+                }
+                operation.add(ImmutableOperation.builder().verb(DELETE.toValue()).key(legacyKey).build());
+                batch++;
+            }
         }
         if (!operation.isEmpty()) {
             performTransaction(operation);
@@ -98,18 +112,20 @@ public class ConsulService {
         List<Operation> operation = new ArrayList<>();
         int batch = 0;
         final String keyPrefix = formatKeyPrefix(configProfile);
-        for (String key : propertiesToDelete) {
-            key = keyPrefix + toConsulRelativeKey(key);
-            operation.add(
-                    ImmutableOperation.builder().verb(DELETE.toValue())
-                            .key(key)
-                            .build()
-            );
-            batch = batch + 1;
-            if (batch == CONSULT_TX_OPERATION_LIMIT) {
-                performTransaction(operation);
-                operation = new ArrayList<>();
-                batch = 0;
+        for (String propertyKey : propertiesToDelete) {
+            for (String relativeKey : consulRelativeKeysFor(propertyKey)) {
+                String key = keyPrefix + relativeKey;
+                operation.add(
+                        ImmutableOperation.builder().verb(DELETE.toValue())
+                                .key(key)
+                                .build()
+                );
+                batch = batch + 1;
+                if (batch == CONSULT_TX_OPERATION_LIMIT) {
+                    performTransaction(operation);
+                    operation = new ArrayList<>();
+                    batch = 0;
+                }
             }
         }
         if (!operation.isEmpty()) {
@@ -157,7 +173,7 @@ public class ConsulService {
         return properties.stream()
                 .filter(value -> !prefix.equals(value.getKey())) // key cannot equal to prefix. skipping such values
                 .map(val -> new ConfigProperty(
-                        unescape(cutPrefix(val.getKey(), prefix).replace("/", ".")),
+                        fromConsulRelativeKey(cutPrefix(val.getKey(), prefix)),
                         val.getValueAsString().orElse(""),
                         false)
                 )
@@ -203,7 +219,7 @@ public class ConsulService {
         return result + "/";
     }
 
-    private final String[][] replacements = {
+    private static final String[][] replacements = {
             {"/", "&sol;"},
             {"*", "&ast;"},
             {"?", "&quest;"},
@@ -212,32 +228,85 @@ public class ConsulService {
     };
 
     /**
-     * Dotted keys keep the historical Consul folders ({@code db.url} → {@code db/url}).
+     * Dotted Spring keys keep historical Consul folders ({@code db.url} → {@code db/url}).
      * Keys that already contain {@code /} are a Consul path: slashes are not escaped,
-     * dots in a segment (Java class names) are kept (PSUPCLCAP-5957).
+     * dots in a segment (Java class names) are kept. Slash keys without any dot keep the legacy
+     * encoding ({@code &sol;}); otherwise {@code a/b} and {@code a.b} would share one Consul path
+     * and could not be told apart on read. So the stored path determines the API name:
+     * {@code &sol;} present -> legacy; dot inside a segment -> slash key; otherwise dotted key.
      */
-    String toConsulRelativeKey(String key) {
-        if (key != null && key.indexOf('/') >= 0) {
-            String s = key;
-            for (String[] replacement : replacements) {
-                if ("/".equals(replacement[0])) {
-                    continue;
-                }
-                s = s.replace(replacement[0], replacement[1]);
-            }
-            return s;
+    public static String toConsulRelativeKey(String key) {
+        if (key != null && key.indexOf('/') >= 0 && hasDotInSegment(key)) {
+            return escapeExceptSlash(key);
         }
+        return legacyToConsulRelativeKey(key);
+    }
+
+    /** Encoding used by previous versions: escape {@code /} then map {@code .} to folders. */
+    public static String legacyToConsulRelativeKey(String key) {
         return escape(key).replace(".", "/");
     }
 
-    private String escape(String s) {
+    static List<String> consulRelativeKeysFor(String key) {
+        String current = toConsulRelativeKey(key);
+        String legacy = legacyToConsulRelativeKey(key);
+        if (current.equals(legacy)) {
+            return List.of(current);
+        }
+        return List.of(current, legacy);
+    }
+
+    /**
+     * Inverse of {@link #toConsulRelativeKey} and of {@link #legacyToConsulRelativeKey},
+     * so GET returns the same API name that was PUT.
+     */
+    static String fromConsulRelativeKey(String relativeKey) {
+        if (relativeKey.contains("&sol;")) {
+            return unescape(relativeKey.replace("/", "."));
+        }
+        if (hasDotInSegment(relativeKey)) {
+            return escapeExceptSlashInverse(relativeKey);
+        }
+        return unescape(relativeKey.replace("/", "."));
+    }
+
+    private static boolean hasDotInSegment(String relativeKey) {
+        for (String segment : relativeKey.split("/")) {
+            if (segment.contains(".")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String escapeExceptSlash(String s) {
+        for (String[] replacement : replacements) {
+            if ("/".equals(replacement[0])) {
+                continue;
+            }
+            s = s.replace(replacement[0], replacement[1]);
+        }
+        return s;
+    }
+
+    private static String escapeExceptSlashInverse(String s) {
+        for (String[] replacement : replacements) {
+            if ("/".equals(replacement[0])) {
+                continue;
+            }
+            s = s.replace(replacement[1], replacement[0]);
+        }
+        return s;
+    }
+
+    private static String escape(String s) {
         for (String[] replacement : replacements) {
             s = s.replace(replacement[0], replacement[1]);
         }
         return s;
     }
 
-    private String unescape(String s) {
+    private static String unescape(String s) {
         for (String[] replacement : replacements) {
             s = s.replace(replacement[1], replacement[0]);
         }

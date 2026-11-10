@@ -1,5 +1,6 @@
 package com.netcracker.cloud.configserver.config;
 
+import com.netcracker.cloud.configserver.config.service.ConsulService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,16 +41,19 @@ public class ConfigPropertiesValidator {
     }
 
     private boolean keysConflict(String key1, String key2) {
-        if (key1.length() == key2.length()) return false;
-        String longerKey, shorterKey;
-        if (key1.length() > key2.length()) {
-            longerKey = key1;
-            shorterKey = key2;
+        // Keys conflict when one is a Consul "folder" of the other, so compare the stored paths.
+        String path1 = ConsulService.toConsulRelativeKey(key1);
+        String path2 = ConsulService.toConsulRelativeKey(key2);
+        if (path1.length() == path2.length()) return false;
+        String longerPath, shorterPath;
+        if (path1.length() > path2.length()) {
+            longerPath = path1;
+            shorterPath = path2;
         } else {
-            longerKey = key2;
-            shorterKey = key1;
+            longerPath = path2;
+            shorterPath = path1;
         }
-        return longerKey.startsWith(shorterKey) && longerKey.charAt(shorterKey.length()) == '.';
+        return longerPath.startsWith(shorterPath) && longerPath.charAt(shorterPath.length()) == '/';
     }
 
     private void validateDotProperty(Map<String, ConfigProperty> mapOfConfigProperties, ValidationResult validationResult) {
