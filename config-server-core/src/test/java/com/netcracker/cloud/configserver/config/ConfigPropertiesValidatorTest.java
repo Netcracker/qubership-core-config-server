@@ -82,4 +82,38 @@ class ConfigPropertiesValidatorTest {
         assertTrue(result.getDotProperties().contains(conflictingKey3 + " start with dot")
                 && result.getDotProperties().contains(conflictingKey4 + " start with dot"));
     }
+
+    @Test
+    void slashLoggerKeysWithFqcnDotsDoNotConflict() {
+        Map<String, ConfigProperty> source = new HashMap<>();
+        source.put("logging/level/com.example", null);
+        source.put("logging/level/com.example.sub", null);
+        assertTrue(validator.validate(source).isValid());
+    }
+
+    @Test
+    void legacyEncodedSlashKeysThatShareAPrefixDoNotConflict() {
+        // stored as a&sol;b and a&sol;b&sol;c: independent Consul entries, accepted before the fix
+        Map<String, ConfigProperty> source = new HashMap<>();
+        source.put("a/b", null);
+        source.put("a/b/c", null);
+        assertTrue(validator.validate(source).isValid());
+    }
+
+    @Test
+    void slashKeyInsideAnotherSlashKeyFolderConflicts() {
+        Map<String, ConfigProperty> source = new HashMap<>();
+        source.put("logging/level/com.example", null);
+        source.put("logging/level/com.example/x", null);
+        assertFalse(validator.validate(source).isValid());
+    }
+
+    @Test
+    void dottedKeyAndSlashKeySharingAFolderConflict() {
+        // a.b -> a/b ; a/b/c.d -> a/b/c.d (a value and a folder at the same Consul path)
+        Map<String, ConfigProperty> source = new HashMap<>();
+        source.put("a.b", null);
+        source.put("a/b/c.d", null);
+        assertFalse(validator.validate(source).isValid());
+    }
 }
