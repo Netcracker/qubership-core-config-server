@@ -57,9 +57,7 @@ public class ConsulService {
 
         for (ConfigProperty property : configProfile.getProperties()) {
             log.debug("Perform escape operations for {}: {}", property.getKey(), valueForLogger(property));
-            String key = property.getKey();
-            key = escape(key).replace(".", "/");
-            key = formatKeyPrefix(configProfile) + key;
+            String key = formatKeyPrefix(configProfile) + toConsulRelativeKey(property.getKey());
             String value = property.getValue() == null ? "" : property.getValue();
             Operation newOperation = ImmutableOperation.builder()
                     .verb(SET.toValue())
@@ -101,7 +99,7 @@ public class ConsulService {
         int batch = 0;
         final String keyPrefix = formatKeyPrefix(configProfile);
         for (String key : propertiesToDelete) {
-            key = keyPrefix + escape(key).replace(".", "/");
+            key = keyPrefix + toConsulRelativeKey(key);
             operation.add(
                     ImmutableOperation.builder().verb(DELETE.toValue())
                             .key(key)
@@ -212,6 +210,25 @@ public class ConsulService {
             {"'", "&apos;"},
             {"%", "&percnt;"},
     };
+
+    /**
+     * Dotted keys keep the historical Consul folders ({@code db.url} → {@code db/url}).
+     * Keys that already contain {@code /} are a Consul path: slashes are not escaped,
+     * dots in a segment (Java class names) are kept (PSUPCLCAP-5957).
+     */
+    String toConsulRelativeKey(String key) {
+        if (key != null && key.indexOf('/') >= 0) {
+            String s = key;
+            for (String[] replacement : replacements) {
+                if ("/".equals(replacement[0])) {
+                    continue;
+                }
+                s = s.replace(replacement[0], replacement[1]);
+            }
+            return s;
+        }
+        return escape(key).replace(".", "/");
+    }
 
     private String escape(String s) {
         for (String[] replacement : replacements) {
